@@ -52,14 +52,14 @@ const tokenUsageLabels = {
   "color/background/dark-subtle": "Secondary surface inside dark backgrounds",
   "color/background/camera-overlay": "Overlay background for secondary information over camera view",
   "color/background/selected": "Selected option background when multiple choices are shown",
-  "color/background/completed-opacity": "Opacity for completed or issue list rows",
-  "color/background/unselected-opacity": "Opacity for unselected choices while another choice is selected",
   "color/line/divider": "Divider and disabled border",
   "color/line/dark": "Border on dark backgrounds",
   "color/line/selected": "Selected option border and voice command button border",
   "color/text/primary-subtle": "Supporting icon or secondary text on white or primary backgrounds",
   "color/text/muted": "Disabled text and secondary information",
   "color/text/on-dark": "Text on dark backgrounds",
+  "color/opacity/completed": "Opacity for completed or issue list rows",
+  "color/opacity/unselected": "Opacity for unselected choices while another choice is selected",
   "font/family/base": "Base UI font",
   "font/data/lg": "Large primary data",
   "font/data/md": "Medium primary data",
@@ -99,12 +99,15 @@ const readTokenGroups = () =>
     const title = tokenGroupLabels[visibleTitle] || visibleTitle;
     const rows = Array.from(group.querySelectorAll("tbody tr")).map((row) => {
       const cells = row.querySelectorAll("td");
-      const token = readCellText(cells[0]);
+      const hasTypeColumn = cells.length === 4;
+      const type = hasTypeColumn ? readCellText(cells[0]) : "";
+      const token = readCellText(cells[hasTypeColumn ? 1 : 0]);
 
       return {
+        type,
         token,
-        usage: tokenUsageLabels[token] || readCellText(cells[1]),
-        value: readCellText(cells[2]),
+        usage: tokenUsageLabels[token] || readCellText(cells[hasTypeColumn ? 2 : 1]),
+        value: readCellText(cells[hasTypeColumn ? 3 : 2]),
       };
     });
 
@@ -112,9 +115,19 @@ const readTokenGroups = () =>
   });
 
 const buildMarkdownTable = (rows) => {
-  const tableRows = rows.map(
-    (row) => `| \`${row.token}\` | ${row.value} | ${row.usage} |`
-  );
+  const hasTypeColumn = rows.some((row) => row.type);
+
+  const tableRows = rows.map((row) => {
+    if (hasTypeColumn) {
+      return `| ${row.type} | \`${row.token}\` | ${row.value} | ${row.usage} |`;
+    }
+
+    return `| \`${row.token}\` | ${row.value} | ${row.usage} |`;
+  });
+
+  if (hasTypeColumn) {
+    return ["| Type | Token | Value | Usage |", "| --- | --- | --- | --- |", ...tableRows].join("\n");
+  }
 
   return ["| Token | Value | Usage |", "| --- | --- | --- |", ...tableRows].join("\n");
 };
