@@ -194,6 +194,15 @@ button {
   left: 7px;
 }
 
+.token-section .copy-icon {
+  background: var(--sg-white) url("assets/tick-circle.svg") center / 18px 18px no-repeat;
+}
+
+.token-section .copy-icon::before,
+.token-section .copy-icon::after {
+  display: none;
+}
+
 .hero {
   display: block;
   max-width: 1200px;
@@ -605,7 +614,28 @@ h1 {
 }
 
 .color-token-table th:nth-child(1),
-.color-token-table td:nth-child(1),
+.color-token-table td:nth-child(1) {
+  width: 14%;
+}
+
+.color-token-table th:nth-child(2),
+.color-token-table td:nth-child(2) {
+  width: 36%;
+  text-align: left;
+}
+
+.color-token-table th:nth-child(3),
+.color-token-table td:nth-child(3) {
+  width: 30%;
+  text-align: left;
+}
+
+.color-token-table th:nth-child(4),
+.color-token-table td:nth-child(4) {
+  width: 20%;
+  text-align: left;
+}
+
 .typography-token-table th:nth-child(1),
 .typography-token-table td:nth-child(1),
 .spacing-token-table th:nth-child(1),
@@ -613,8 +643,6 @@ h1 {
   width: 14%;
 }
 
-.color-token-table th:nth-child(2),
-.color-token-table td:nth-child(2),
 .typography-token-table th:nth-child(2),
 .typography-token-table td:nth-child(2),
 .spacing-token-table th:nth-child(2),
@@ -623,8 +651,6 @@ h1 {
   text-align: left;
 }
 
-.color-token-table th:nth-child(3),
-.color-token-table td:nth-child(3),
 .typography-token-table th:nth-child(3),
 .typography-token-table td:nth-child(3),
 .spacing-token-table th:nth-child(3),
@@ -633,8 +659,6 @@ h1 {
   text-align: left;
 }
 
-.color-token-table th:nth-child(4),
-.color-token-table td:nth-child(4),
 .typography-token-table th:nth-child(4),
 .typography-token-table td:nth-child(4),
 .spacing-token-table th:nth-child(4),
@@ -661,11 +685,45 @@ h1 {
   overflow-wrap: anywhere;
 }
 
+.token-copy-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 24px;
+  color: var(--sg-text);
+  text-decoration: underline;
+  text-decoration-color: rgba(0, 115, 255, 0.32);
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+
+.token-copy-text::after {
+  content: "";
+  display: none;
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  background: url("assets/tick-circle.svg") center / 18px 18px no-repeat;
+}
+
+.token-copy-text:hover,
+.token-copy-text:focus-visible {
+  color: var(--sg-blue-dark);
+  outline: none;
+  text-decoration-color: var(--sg-blue);
+}
+
+.token-copy-text.is-copied::after {
+  display: inline-block;
+}
+
 .token-type {
+  border-right: 1px solid var(--sg-line);
   color: var(--sg-blue-dark);
   font-size: 13px;
   font-weight: 800;
   text-transform: lowercase;
+  vertical-align: middle;
 }
 
 .token-value {
@@ -679,6 +737,7 @@ h1 {
 
 .color-token-value {
   width: 100%;
+  justify-content: flex-start;
 }
 
 .token-editable {
