@@ -592,3 +592,74 @@ savePickerLinks.forEach((link) => {
     }
   });
 });
+
+const parallaxSections = Array.from(document.querySelectorAll(".section"));
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+const updateParallax = () => {
+  if (reduceMotion.matches) {
+    return;
+  }
+
+  const viewportCenter = window.innerHeight / 2;
+
+  parallaxSections.forEach((section, index) => {
+    const rect = section.getBoundingClientRect();
+    const sectionCenter = rect.top + rect.height / 2;
+    const speed = index % 2 === 0 ? 0.035 : 0.05;
+    const offset = Math.max(-28, Math.min(28, (viewportCenter - sectionCenter) * speed));
+
+    section.style.setProperty("--parallax-y", `${offset.toFixed(2)}px`);
+  });
+};
+
+let parallaxFrame = 0;
+
+const requestParallaxUpdate = () => {
+  if (parallaxFrame) {
+    return;
+  }
+
+  parallaxFrame = window.requestAnimationFrame(() => {
+    parallaxFrame = 0;
+    updateParallax();
+  });
+};
+
+window.addEventListener("scroll", requestParallaxUpdate, { passive: true });
+window.addEventListener("resize", requestParallaxUpdate);
+updateParallax();
+
+const revealItems = Array.from(
+  document.querySelectorAll(
+    ".hero, .section-header, .panel, .token-table, .color-ratio-card, .layout-demo, .component-list, .pattern-grid, .prompt-box",
+  ),
+);
+
+revealItems.forEach((item, index) => {
+  item.classList.add("reveal-item");
+  item.style.setProperty("--reveal-delay", `${Math.min(index % 4, 3) * 35}ms`);
+});
+
+if (reduceMotion.matches || !("IntersectionObserver" in window)) {
+  revealItems.forEach((item) => item.classList.add("is-revealed"));
+} else {
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        entry.target.classList.add("is-revealed");
+        revealObserver.unobserve(entry.target);
+      });
+    },
+    {
+      rootMargin: "0px 0px -4% 0px",
+      threshold: 0.02,
+    },
+  );
+
+  revealItems.forEach((item) => revealObserver.observe(item));
+}

@@ -90,7 +90,7 @@
         <article class="panel">
           <p class="principle-number">03</p>
           <h3>최대 3줄</h3>
-          <p>상시 노출되는 작업 정보는 1줄 핵심과 1줄 보조를 권장하며, 최대 3줄을 넘기지 않습니다.</p>
+          <p>상시 노출되는 작업 정보는 1줄 핵심 + 1줄 보조를 권장하며, 필요한 경우에만 3줄을 사용합니다.<br />정보와 UI 요소를 과도하게 담지 않고, 작업에 필요한 최소 정보만 노출합니다.</p>
         </article>
             <article class="panel">
               <p class="principle-number">04</p>
@@ -100,7 +100,7 @@
         <article class="panel">
           <p class="principle-number">05</p>
           <h3>유동적인 표시 정보</h3>
-          <p>BIN, SKU, 모델명, 수량, 진행률은 예시 필드입니다. 실제 표시 정보는 프로젝트별로 정의합니다.</p>
+          <p>실제 표시 정보(BIN, SKU, 모델명 등), 주요 컬러는 프로젝트별로 정의합니다.</p>
         </article>
       </div>
     </section>
@@ -120,7 +120,6 @@
           <div class="token-toolbar">
             <h3>색상 토큰</h3>
           </div>
-          <p class="token-note">색상은 숫자 단계가 아니라 유형과 사용처로 구분합니다. 같은 값도 background, line, text처럼 실제 적용 위치에 따라 나눠 사용합니다.</p>
           <table class="token-table token-table-compact color-token-table">
             <thead>
               <tr>
@@ -132,199 +131,191 @@
             </thead>
             <tbody>
               <tr>
-                <td class="token-type">background</td>
-                <td>바코드 스캔 토스트</td>
-                <td class="token-name">color/background/scan-toast</td>
+                <td class="token-type">Surface</td>
+                <td>행동 지시(바코드 스캔)</td>
+                <td class="token-name">color/background/primary-scan</td>
                 <td><span class="token-value color-token-value"><span class="swatch" style="background:#003CFF"></span><span class="token-editable" data-token-value contenteditable="plaintext-only" spellcheck="false">#003CFF</span><button class="copy-button copy-icon" data-copy="#003CFF" aria-label="#003CFF 복사" title="#003CFF 복사"></button></span></td>
               </tr>
               <tr>
-                <td class="token-type">background</td>
-                <td>기본 프라이머리, 선택 UI 발화, 활성 상태</td>
+                <td class="token-type">Surface</td>
+                <td>중요(활성 상태, 발화 버튼)</td>
                 <td class="token-name">color/background/primary</td>
                 <td><span class="token-value color-token-value"><span class="swatch" style="background:#0073FF"></span><span class="token-editable" data-token-value contenteditable="plaintext-only" spellcheck="false">#0073FF</span><button class="copy-button copy-icon" data-copy="#0073FF" aria-label="#0073FF 복사" title="#0073FF 복사"></button></span></td>
               </tr>
               <tr>
-                <td class="token-type">background</td>
-                <td>서브 프라이머리, 프라이머리 위 아이콘 보조색</td>
+                <td class="token-type">Surface</td>
+                <td>보조(발화 아이콘)</td>
                 <td class="token-name">color/background/primary-subtle</td>
                 <td><span class="token-value color-token-value"><span class="swatch" style="background:#90C2FF"></span><span class="token-editable" data-token-value contenteditable="plaintext-only" spellcheck="false">#90C2FF</span><button class="copy-button copy-icon" data-copy="#90C2FF" aria-label="#90C2FF 복사" title="#90C2FF 복사"></button></span></td>
               </tr>
               <tr>
-                <td class="token-type">background</td>
-                <td>서브 그레이</td>
-                <td class="token-name">color/background/subtle</td>
-                <td><span class="token-value color-token-value"><span class="swatch" style="background:#EFF2F8"></span><span class="token-editable" data-token-value contenteditable="plaintext-only" spellcheck="false">#EFF2F8</span><button class="copy-button copy-icon" data-copy="#EFF2F8" aria-label="#EFF2F8 복사" title="#EFF2F8 복사"></button></span></td>
-              </tr>
-              <tr>
-                <td class="token-type">background</td>
-                <td>비활성화 그레이</td>
-                <td class="token-name">color/background/disabled</td>
-                <td><span class="token-value color-token-value"><span class="swatch" style="background:#CCCCCC"></span><span class="token-editable" data-token-value contenteditable="plaintext-only" spellcheck="false">#CCCCCC</span><button class="copy-button copy-icon" data-copy="#CCCCCC" aria-label="#CCCCCC 복사" title="#CCCCCC 복사"></button></span></td>
-              </tr>
-              <tr>
-                <td class="token-type">background</td>
-                <td>정보 표면, 서브 버튼</td>
+                <td class="token-type">Surface</td>
+                <td>정보, 서브 버튼</td>
                 <td class="token-name">color/background/white</td>
                 <td><span class="token-value color-token-value"><span class="swatch" style="background:#FFFFFF"></span><span class="token-editable" data-token-value contenteditable="plaintext-only" spellcheck="false">#FFFFFF</span><button class="copy-button copy-icon" data-copy="#FFFFFF" aria-label="#FFFFFF 복사" title="#FFFFFF 복사"></button></span></td>
               </tr>
               <tr>
-                <td class="token-type">background</td>
-                <td>선택 UI, 상태 화면의 카메라 OFF</td>
-                <td class="token-name">color/background/dark</td>
+                <td class="token-type">Surface</td>
+                <td>카메라 OFF</td>
+                <td class="token-name">color/background/black</td>
                 <td><span class="token-value color-token-value"><span class="swatch" style="background:#000000"></span><span class="token-editable" data-token-value contenteditable="plaintext-only" spellcheck="false">#000000</span><button class="copy-button copy-icon" data-copy="#000000" aria-label="#000000 복사" title="#000000 복사"></button></span></td>
               </tr>
               <tr>
-                <td class="token-type">background</td>
-                <td>어두운 화면 안의 서브 표면</td>
-                <td class="token-name">color/background/dark-subtle</td>
+                <td class="token-type">Surface</td>
+                <td>서브 정보</td>
+                <td class="token-name">color/background/gray-overlay</td>
+                <td><span class="token-value color-token-value"><span class="swatch" style="background:rgba(0,0,0,0.8)"></span><span class="token-editable" data-token-value contenteditable="plaintext-only" spellcheck="false">#000000 80%</span><button class="copy-button copy-icon" data-copy="#000000 80%" aria-label="#000000 80% 복사" title="#000000 80% 복사"></button></span></td>
+              </tr>
+              <tr>
+                <td class="token-type">Surface</td>
+                <td>어두운 배경 위 그레이</td>
+                <td class="token-name">color/background/gray-dark</td>
                 <td><span class="token-value color-token-value"><span class="swatch" style="background:#444444"></span><span class="token-editable" data-token-value contenteditable="plaintext-only" spellcheck="false">#444444</span><button class="copy-button copy-icon" data-copy="#444444" aria-label="#444444 복사" title="#444444 복사"></button></span></td>
               </tr>
               <tr>
-                <td class="token-type">background</td>
-                <td>카메라 위 서브정보</td>
-                <td class="token-name">color/background/camera-overlay</td>
-                <td><span class="token-value color-token-value"><span class="swatch" style="background:rgba(0,0,0,0.8)"></span><span class="token-editable" data-token-value contenteditable="plaintext-only" spellcheck="false">rgba(0,0,0,0.8)</span><button class="copy-button copy-icon" data-copy="rgba(0,0,0,0.8)" aria-label="rgba(0,0,0,0.8) 복사" title="rgba(0,0,0,0.8) 복사"></button></span></td>
+                <td class="token-type">Surface</td>
+                <td>어두운 배경 위 비활성화</td>
+                <td class="token-name">color/background/gray-disabled-dark</td>
+                <td><span class="token-value color-token-value"><span class="swatch" style="background:#666666"></span><span class="token-editable" data-token-value contenteditable="plaintext-only" spellcheck="false">#666666</span><button class="copy-button copy-icon" data-copy="#666666" aria-label="#666666 복사" title="#666666 복사"></button></span></td>
               </tr>
               <tr>
-                <td class="token-type">background</td>
-                <td>여러 선택지 중 선택된 항목</td>
-                <td class="token-name">color/background/selected</td>
-                <td><span class="token-value color-token-value"><span class="swatch" style="background:#C8FFC3"></span><span class="token-editable" data-token-value contenteditable="plaintext-only" spellcheck="false">#C8FFC3</span><button class="copy-button copy-icon" data-copy="#C8FFC3" aria-label="#C8FFC3 복사" title="#C8FFC3 복사"></button></span></td>
+                <td class="token-type">Surface</td>
+                <td>밝은 배경 위 비활성화</td>
+                <td class="token-name">color/background/gray-disabled-bright</td>
+                <td><span class="token-value color-token-value"><span class="swatch" style="background:#CCCCCC"></span><span class="token-editable" data-token-value contenteditable="plaintext-only" spellcheck="false">#CCCCCC</span><button class="copy-button copy-icon" data-copy="#CCCCCC" aria-label="#CCCCCC 복사" title="#CCCCCC 복사"></button></span></td>
               </tr>
               <tr>
-                <td class="token-type">background</td>
-                <td>완료, 성공 상태 표면</td>
-                <td class="token-name">color/background/success</td>
+                <td class="token-type">Surface</td>
+                <td>밝은 배경 위 그레이</td>
+                <td class="token-name">color/background/gray-bright</td>
+                <td><span class="token-value color-token-value"><span class="swatch" style="background:#EFF2F8"></span><span class="token-editable" data-token-value contenteditable="plaintext-only" spellcheck="false">#EFF2F8</span><button class="copy-button copy-icon" data-copy="#EFF2F8" aria-label="#EFF2F8 복사" title="#EFF2F8 복사"></button></span></td>
+              </tr>
+              <tr>
+                <td class="token-type">Surface</td>
+                <td>완료, 성공</td>
+                <td class="token-name">color/background/status-success</td>
                 <td><span class="token-value color-token-value"><span class="swatch" style="background:#12B52A"></span><span class="token-editable" data-token-value contenteditable="plaintext-only" spellcheck="false">#12B52A</span><button class="copy-button copy-icon" data-copy="#12B52A" aria-label="#12B52A 복사" title="#12B52A 복사"></button></span></td>
               </tr>
               <tr>
-                <td class="token-type">background</td>
-                <td>주의, 확인 필요 상태 표면</td>
-                <td class="token-name">color/background/warning</td>
+                <td class="token-type">Surface</td>
+                <td>화면에 Primary 컬러가 많을 때, 다중 선택된 선택지</td>
+                <td class="token-name">color/background/status-success-selected</td>
+                <td><span class="token-value color-token-value"><span class="swatch" style="background:#C8FFC3"></span><span class="token-editable" data-token-value contenteditable="plaintext-only" spellcheck="false">#C8FFC3</span><button class="copy-button copy-icon" data-copy="#C8FFC3" aria-label="#C8FFC3 복사" title="#C8FFC3 복사"></button></span></td>
+              </tr>
+              <tr>
+                <td class="token-type">Surface</td>
+                <td>주의, 확인 필요</td>
+                <td class="token-name">color/background/status-warning</td>
                 <td><span class="token-value color-token-value"><span class="swatch" style="background:#F59E0B"></span><span class="token-editable" data-token-value contenteditable="plaintext-only" spellcheck="false">#F59E0B</span><button class="copy-button copy-icon" data-copy="#F59E0B" aria-label="#F59E0B 복사" title="#F59E0B 복사"></button></span></td>
               </tr>
               <tr>
-                <td class="token-type">background</td>
-                <td>오류, 중단 상태 표면</td>
-                <td class="token-name">color/background/error</td>
+                <td class="token-type">Surface</td>
+                <td>오류, 중단</td>
+                <td class="token-name">color/background/status-error</td>
                 <td><span class="token-value color-token-value"><span class="swatch" style="background:#F04438"></span><span class="token-editable" data-token-value contenteditable="plaintext-only" spellcheck="false">#F04438</span><button class="copy-button copy-icon" data-copy="#F04438" aria-label="#F04438 복사" title="#F04438 복사"></button></span></td>
               </tr>
               <tr>
-                <td class="token-type">background</td>
+                <td class="token-type">Surface</td>
                 <td>이슈, 확인 필요 카드</td>
-                <td class="token-name">color/background/issue</td>
+                <td class="token-name">color/background/status-issue</td>
                 <td><span class="token-value color-token-value"><span class="swatch" style="background:#D8B4B7"></span><span class="token-editable" data-token-value contenteditable="plaintext-only" spellcheck="false">#D8B4B7</span><button class="copy-button copy-icon" data-copy="#D8B4B7" aria-label="#D8B4B7 복사" title="#D8B4B7 복사"></button></span></td>
               </tr>
               <tr>
                 <td class="token-type">line</td>
-                <td>디바이더, 비활성 상태</td>
-                <td class="token-name">color/line/divider</td>
+                <td>밝은 배경 위 디바이더</td>
+                <td class="token-name">color/line/basic</td>
                 <td><span class="token-value color-token-value"><span class="swatch" style="background:#CCCCCC"></span><span class="token-editable" data-token-value contenteditable="plaintext-only" spellcheck="false">#CCCCCC</span><button class="copy-button copy-icon" data-copy="#CCCCCC" aria-label="#CCCCCC 복사" title="#CCCCCC 복사"></button></span></td>
               </tr>
               <tr>
                 <td class="token-type">line</td>
-                <td>어두운 화면 위 밝은 구분선</td>
-                <td class="token-name">color/line/light</td>
-                <td><span class="token-value color-token-value"><span class="swatch" style="background:#FFFFFF"></span><span class="token-editable" data-token-value contenteditable="plaintext-only" spellcheck="false">#FFFFFF</span><button class="copy-button copy-icon" data-copy="#FFFFFF" aria-label="#FFFFFF 복사" title="#FFFFFF 복사"></button></span></td>
-              </tr>
-              <tr>
-                <td class="token-type">line</td>
-                <td>밝은 화면 위 강한 구분선</td>
-                <td class="token-name">color/line/strong</td>
-                <td><span class="token-value color-token-value"><span class="swatch" style="background:#000000"></span><span class="token-editable" data-token-value contenteditable="plaintext-only" spellcheck="false">#000000</span><button class="copy-button copy-icon" data-copy="#000000" aria-label="#000000 복사" title="#000000 복사"></button></span></td>
-              </tr>
-              <tr>
-                <td class="token-type">line</td>
-                <td>어두운 표면</td>
+                <td>어두운 배경 위 디바이더</td>
                 <td class="token-name">color/line/dark</td>
                 <td><span class="token-value color-token-value"><span class="swatch" style="background:#444444"></span><span class="token-editable" data-token-value contenteditable="plaintext-only" spellcheck="false">#444444</span><button class="copy-button copy-icon" data-copy="#444444" aria-label="#444444 복사" title="#444444 복사"></button></span></td>
               </tr>
               <tr>
                 <td class="token-type">line</td>
-                <td>선택지 외곽, 발화 버튼</td>
-                <td class="token-name">color/line/selected</td>
+                <td>컬러 배경 위 디바이더</td>
+                <td class="token-name">color/line/overlay-bright</td>
+                <td><span class="token-value color-token-value"><span class="swatch" style="background:rgba(0,0,0,0.5)"></span><span class="token-editable" data-token-value contenteditable="plaintext-only" spellcheck="false">#000000 50%</span><button class="copy-button copy-icon" data-copy="#000000 50%" aria-label="#000000 50% 복사" title="#000000 50% 복사"></button></span></td>
+              </tr>
+              <tr>
+                <td class="token-type">line</td>
+                <td>성공</td>
+                <td class="token-name">color/line/status-success</td>
                 <td><span class="token-value color-token-value"><span class="swatch" style="background:#12B52A"></span><span class="token-editable" data-token-value contenteditable="plaintext-only" spellcheck="false">#12B52A</span><button class="copy-button copy-icon" data-copy="#12B52A" aria-label="#12B52A 복사" title="#12B52A 복사"></button></span></td>
               </tr>
               <tr>
                 <td class="token-type">line</td>
-                <td>주의, 확인 필요 외곽선</td>
-                <td class="token-name">color/line/warning</td>
+                <td>주의, 확인 필요</td>
+                <td class="token-name">color/line/status-warning</td>
                 <td><span class="token-value color-token-value"><span class="swatch" style="background:#F59E0B"></span><span class="token-editable" data-token-value contenteditable="plaintext-only" spellcheck="false">#F59E0B</span><button class="copy-button copy-icon" data-copy="#F59E0B" aria-label="#F59E0B 복사" title="#F59E0B 복사"></button></span></td>
               </tr>
               <tr>
                 <td class="token-type">line</td>
-                <td>오류, 중단 외곽선</td>
-                <td class="token-name">color/line/error</td>
+                <td>오류, 중단</td>
+                <td class="token-name">color/line/status-error</td>
                 <td><span class="token-value color-token-value"><span class="swatch" style="background:#F04438"></span><span class="token-editable" data-token-value contenteditable="plaintext-only" spellcheck="false">#F04438</span><button class="copy-button copy-icon" data-copy="#F04438" aria-label="#F04438 복사" title="#F04438 복사"></button></span></td>
               </tr>
               <tr>
                 <td class="token-type">line</td>
-                <td>이슈, 확인 필요 외곽선</td>
-                <td class="token-name">color/line/issue</td>
+                <td>이슈, 확인</td>
+                <td class="token-name">color/line/status-issue</td>
                 <td><span class="token-value color-token-value"><span class="swatch" style="background:#D8B4B7"></span><span class="token-editable" data-token-value contenteditable="plaintext-only" spellcheck="false">#D8B4B7</span><button class="copy-button copy-icon" data-copy="#D8B4B7" aria-label="#D8B4B7 복사" title="#D8B4B7 복사"></button></span></td>
               </tr>
               <tr>
                 <td class="token-type">text</td>
                 <td>밝은 화면 위 주요 정보</td>
-                <td class="token-name">color/text/primary</td>
+                <td class="token-name">color/text/black</td>
                 <td><span class="token-value color-token-value"><span class="swatch" style="background:#000000"></span><span class="token-editable" data-token-value contenteditable="plaintext-only" spellcheck="false">#000000</span><button class="copy-button copy-icon" data-copy="#000000" aria-label="#000000 복사" title="#000000 복사"></button></span></td>
               </tr>
               <tr>
                 <td class="token-type">text</td>
-                <td>흰색 또는 프라이머리 위 아이콘/서브 정보</td>
+                <td>흰색 또는 프라이머리 위 서브 정보</td>
                 <td class="token-name">color/text/primary-subtle</td>
                 <td><span class="token-value color-token-value"><span class="swatch" style="background:#90C2FF"></span><span class="token-editable" data-token-value contenteditable="plaintext-only" spellcheck="false">#90C2FF</span><button class="copy-button copy-icon" data-copy="#90C2FF" aria-label="#90C2FF 복사" title="#90C2FF 복사"></button></span></td>
               </tr>
               <tr>
                 <td class="token-type">text</td>
-                <td>비활성화 상태, 서브 정보</td>
-                <td class="token-name">color/text/muted</td>
+                <td>비활성화, 서브 정보</td>
+                <td class="token-name">color/text/disabled</td>
                 <td><span class="token-value color-token-value"><span class="swatch" style="background:#999999"></span><span class="token-editable" data-token-value contenteditable="plaintext-only" spellcheck="false">#999999</span><button class="copy-button copy-icon" data-copy="#999999" aria-label="#999999 복사" title="#999999 복사"></button></span></td>
               </tr>
               <tr>
                 <td class="token-type">text</td>
                 <td>어두운 화면 위 정보</td>
-                <td class="token-name">color/text/on-dark</td>
+                <td class="token-name">color/text/white</td>
                 <td><span class="token-value color-token-value"><span class="swatch" style="background:#FFFFFF"></span><span class="token-editable" data-token-value contenteditable="plaintext-only" spellcheck="false">#FFFFFF</span><button class="copy-button copy-icon" data-copy="#FFFFFF" aria-label="#FFFFFF 복사" title="#FFFFFF 복사"></button></span></td>
               </tr>
               <tr>
                 <td class="token-type">text</td>
-                <td>성공, 완료 문구</td>
-                <td class="token-name">color/text/success</td>
+                <td>성공, 완료</td>
+                <td class="token-name">color/text/status-success</td>
                 <td><span class="token-value color-token-value"><span class="swatch" style="background:#12B52A"></span><span class="token-editable" data-token-value contenteditable="plaintext-only" spellcheck="false">#12B52A</span><button class="copy-button copy-icon" data-copy="#12B52A" aria-label="#12B52A 복사" title="#12B52A 복사"></button></span></td>
               </tr>
               <tr>
                 <td class="token-type">text</td>
-                <td>주의, 확인 필요 문구</td>
-                <td class="token-name">color/text/warning</td>
+                <td>주의, 확인 필요</td>
+                <td class="token-name">color/text/status-warning</td>
                 <td><span class="token-value color-token-value"><span class="swatch" style="background:#F59E0B"></span><span class="token-editable" data-token-value contenteditable="plaintext-only" spellcheck="false">#F59E0B</span><button class="copy-button copy-icon" data-copy="#F59E0B" aria-label="#F59E0B 복사" title="#F59E0B 복사"></button></span></td>
               </tr>
               <tr>
                 <td class="token-type">text</td>
-                <td>오류, 중단 문구</td>
-                <td class="token-name">color/text/error</td>
+                <td>오류, 중단</td>
+                <td class="token-name">color/text/status-error</td>
                 <td><span class="token-value color-token-value"><span class="swatch" style="background:#F04438"></span><span class="token-editable" data-token-value contenteditable="plaintext-only" spellcheck="false">#F04438</span><button class="copy-button copy-icon" data-copy="#F04438" aria-label="#F04438 복사" title="#F04438 복사"></button></span></td>
-              </tr>
-              <tr>
-                <td class="token-type">text</td>
-                <td>이슈, 확인 필요 문구</td>
-                <td class="token-name">color/text/issue</td>
-                <td><span class="token-value color-token-value"><span class="swatch" style="background:#D8B4B7"></span><span class="token-editable" data-token-value contenteditable="plaintext-only" spellcheck="false">#D8B4B7</span><button class="copy-button copy-icon" data-copy="#D8B4B7" aria-label="#D8B4B7 복사" title="#D8B4B7 복사"></button></span></td>
-              </tr>
-              <tr>
-                <td class="token-type">opacity</td>
-                <td>완료/이슈 리스트 항목</td>
-                <td class="token-name">color/opacity/completed</td>
-                <td><span class="token-value color-token-value"><span class="swatch opacity-swatch" style="background:#12B52A; opacity:0.8"></span><span class="token-editable" data-token-value contenteditable="plaintext-only" spellcheck="false">80%</span><button class="copy-button copy-icon" data-copy="80%" aria-label="80% 복사" title="80% 복사"></button></span></td>
-              </tr>
-              <tr>
-                <td class="token-type">opacity</td>
-                <td>선택된 항목 외 나머지 선택지</td>
-                <td class="token-name">color/opacity/unselected</td>
-                <td><span class="token-value color-token-value"><span class="swatch opacity-swatch" style="background:#0073FF; opacity:0.4"></span><span class="token-editable" data-token-value contenteditable="plaintext-only" spellcheck="false">40%</span><button class="copy-button copy-icon" data-copy="40%" aria-label="40% 복사" title="40% 복사"></button></span></td>
               </tr>
             </tbody>
           </table>
+          <div class="color-ratio-card">
+            <h4>색상 비율</h4>
+            <p>화면 색상 비율은 60-30-10 원칙을 참고합니다.<br />배경/Surface 계열을 약 60%, 보조 영역을 약 30%, Primary 또는 Accent 컬러는 약 10% 내외로 제한해 핵심 액션과 강조 요소에 사용합니다.</p>
+            <p>단, UI 특성상 Primary 컬러는 브랜드 면적보다 CTA, 선택 상태, 주요 인터랙션 요소 중심으로 적용합니다.</p>
+            <div class="color-ratio-bar" aria-label="60 30 10 색상 비율">
+              <span class="ratio-surface">60%</span>
+              <span class="ratio-secondary">30%</span>
+              <span class="ratio-accent">10%</span>
+            </div>
+          </div>
         </div>
 
         <div>
