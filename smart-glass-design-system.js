@@ -148,7 +148,8 @@ This file is generated from the current design system page. If token values are 
 - Use the center area only for scan success, scan failure, danger warnings, task completion, or required user confirmation.
 - Keep top and side areas for secondary information and actions.
 - Keep content short: one primary line, one secondary line, and no more than three lines total.
-- Use camera HUD screens for work guidance and scanning. Use camera-off screens for lists, category selection, issue reporting, and completion states.
+- Break work guidance into small steps because smart glass screens are narrow.
+- Provide immediate visual and voice feedback for success and failure states.
 - Treat customer-specific fields, terminology, colors, and task order as configurable.
 
 ## Token Source
