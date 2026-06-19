@@ -7,10 +7,11 @@ This file is the fallback Markdown guide for the design system page. In the brow
 - Prioritize the lower-center HUD area for primary work guidance.
 - Use the center area only for scan success, scan failure, danger warnings, task completion, or required user confirmation.
 - Keep top and side areas for secondary information and actions.
-- Keep content short: one primary line, one secondary line, and no more than three lines total.
+- For always-visible work information, prefer one primary line plus one secondary line. Use three lines only when necessary.
+- Do not overload the HUD with information or UI controls. Show only the minimum information needed for the task.
 - Break work guidance into small steps because smart glass screens are narrow.
 - Provide immediate visual and voice feedback for success and failure states.
-- Treat customer-specific fields, terminology, colors, and task order as configurable.
+- Treat displayed information such as BIN, SKU, model name, terminology, key colors, and task order as project-specific.
 
 ## Visual Style Direction
 
@@ -26,19 +27,19 @@ Use a bright, calm, trustworthy visual tone for web and documentation surfaces. 
 
 ## 60-30-10 Color Rule
 
-Use color with restraint. Do not fill the whole screen with the primary color unless the screen is intentionally a branded section or state surface.
+Use the 60-30-10 rule as a reference for screen color proportion.
 
-- 60%: Background and base surfaces such as white, gray-50, gray-100, or very light neutral colors.
-- 30%: Cards, grouped sections, secondary backgrounds, subtle gray or subtle blue-tinted surfaces.
-- 10%: Primary or accent color for the main action, selected state, key metric, scan feedback, or important status.
+- 60%: Background and Surface colors.
+- 30%: Secondary supporting areas.
+- 10%: Primary or Accent colors for core actions and emphasis.
 
-Primary color must guide attention. It should appear on the strongest action or the most important state, not on every decorative element.
+Primary color must guide attention. In smart-glass UI, apply Primary color mainly to CTAs, selected states, and key interaction elements rather than large brand-colored areas.
 
 ## Color Token Naming Rules
 
 Use semantic color roles, not numeric color scales. Do not use names like `success-5`, `blue-60`, or `gray-100` as the main token exposed to AI.
 
-- Use the `Type` column to show where the color is applied: `background`, `line`, `text`, or `opacity`.
+- Use the `Type` column to show where the color is applied: `Surface`, `line`, or `text`.
 - Use the `Usage` column to explain intent and context in plain language, such as primary action, selected state, dark screen, success feedback, warning, error, or issue state.
 - When hierarchy is needed, keep it visible in the token name with obvious suffixes such as `sub`, `dark`, or `on-dark`.
 - Keep detailed color scales internal. The public guide should explain how each token is used.
@@ -111,38 +112,35 @@ When generating a screen, compose it in this order:
 
 | Type | Usage | Value | Token |
 | --- | --- | --- | --- |
-| background | Barcode scan toast | #003CFF | `color/background/scan-toast` |
-| background | Primary action, voice-command selection, active state | #0073FF | `color/background/primary` |
-| background | Sub-primary surface and supporting icon color on primary surfaces | #90C2FF | `color/background/primary-subtle` |
-| background | Secondary gray surface | #EFF2F8 | `color/background/subtle` |
-| background | Disabled gray surface | #CCCCCC | `color/background/disabled` |
-| background | Information surface and secondary button | #FFFFFF | `color/background/white` |
-| background | Camera-off selection UI and status screens | #000000 | `color/background/dark` |
-| background | Secondary surface inside dark screens | #444444 | `color/background/dark-subtle` |
-| background | Secondary information over camera view | rgba(0,0,0,0.8) | `color/background/camera-overlay` |
-| background | Selected option when multiple choices are shown | #C8FFC3 | `color/background/selected` |
-| background | Success or completed state surface | #12B52A | `color/background/success` |
-| background | Warning or needs-confirmation state surface | #F59E0B | `color/background/warning` |
-| background | Error or stop state surface | #F04438 | `color/background/error` |
-| background | Issue or needs-confirmation card | #D8B4B7 | `color/background/issue` |
-| line | Divider and disabled state | #CCCCCC | `color/line/divider` |
-| line | Light divider on dark screens | #FFFFFF | `color/line/light` |
-| line | Strong divider on light screens | #000000 | `color/line/strong` |
-| line | Dark surfaces | #444444 | `color/line/dark` |
-| line | Selected option and voice command button | #12B52A | `color/line/selected` |
-| line | Warning or needs-confirmation outline | #F59E0B | `color/line/warning` |
-| line | Error or stop outline | #F04438 | `color/line/error` |
-| line | Issue or needs-confirmation outline | #D8B4B7 | `color/line/issue` |
-| text | Primary information on light screens | #000000 | `color/text/primary` |
-| text | Supporting icon or secondary information on white or primary surfaces | #90C2FF | `color/text/primary-subtle` |
-| text | Disabled state and secondary information | #999999 | `color/text/muted` |
-| text | Information on dark screens | #FFFFFF | `color/text/on-dark` |
-| text | Success or completed message | #12B52A | `color/text/success` |
-| text | Warning or needs-confirmation message | #F59E0B | `color/text/warning` |
-| text | Error or stop message | #F04438 | `color/text/error` |
-| text | Issue or needs-confirmation message | #D8B4B7 | `color/text/issue` |
-| opacity | Completed or issue list rows | 80% | `color/opacity/completed` |
-| opacity | Unselected choices while another choice is selected | 40% | `color/opacity/unselected` |
+| Surface | Work instruction, barcode scan | #003CFF | `color/background/primary-scan` |
+| Surface | Important states, active state, voice button | #0073FF | `color/background/primary` |
+| Surface | Supporting voice icon | #90C2FF | `color/background/primary-subtle` |
+| Surface | Information surface, secondary button | #FFFFFF | `color/background/white` |
+| Surface | Camera off | #000000 | `color/background/black` |
+| Surface | Secondary information | #000000 80% | `color/background/gray-overlay` |
+| Surface | Gray on dark backgrounds | #444444 | `color/background/gray-dark` |
+| Surface | Disabled on dark backgrounds | #666666 | `color/background/gray-disabled-dark` |
+| Surface | Disabled on bright backgrounds | #CCCCCC | `color/background/gray-disabled-bright` |
+| Surface | Gray on bright backgrounds | #EFF2F8 | `color/background/gray-bright` |
+| Surface | Completed, success | #12B52A | `color/background/status-success` |
+| Surface | Multi-selected option when Primary color is already heavily used | #C8FFC3 | `color/background/status-success-selected` |
+| Surface | Warning, confirmation needed | #F59E0B | `color/background/status-warning` |
+| Surface | Error, stop | #F04438 | `color/background/status-error` |
+| Surface | Issue, needs-confirmation card | #D8B4B7 | `color/background/status-issue` |
+| line | Divider on bright backgrounds | #CCCCCC | `color/line/basic` |
+| line | Divider on dark backgrounds | #444444 | `color/line/dark` |
+| line | Divider on colored backgrounds | #000000 50% | `color/line/overlay-bright` |
+| line | Success | #12B52A | `color/line/status-success` |
+| line | Warning, confirmation needed | #F59E0B | `color/line/status-warning` |
+| line | Error, stop | #F04438 | `color/line/status-error` |
+| line | Issue, confirmation | #D8B4B7 | `color/line/status-issue` |
+| text | Information on bright backgrounds | #000000 | `color/text/black` |
+| text | Secondary information on white or primary surfaces | #90C2FF | `color/text/primary-subtle` |
+| text | Disabled and secondary information | #999999 | `color/text/disabled` |
+| text | Information on dark backgrounds | #FFFFFF | `color/text/white` |
+| text | Success, completed | #12B52A | `color/text/status-success` |
+| text | Warning, confirmation needed | #F59E0B | `color/text/status-warning` |
+| text | Error, stop | #F04438 | `color/text/status-error` |
 
 ### Typography Tokens
 
