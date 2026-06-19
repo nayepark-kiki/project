@@ -1,0 +1,46 @@
+/* Icon helper for Base UI Kit.
+   The icons in this kit are Vuesax (linear + bold). We pull them from
+   Iconify's CDN — pinned name set:
+     vuesax-linear:<name> / vuesax-bold:<name>
+   Use:
+     <span class="icon" style="--ic: url('https://api.iconify.design/vuesax-linear/close.svg')"></span>
+   The mask trick lets us recolor via CSS `color`.
+*/
+.icon {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-color: currentColor;
+  -webkit-mask: var(--ic) center / contain no-repeat;
+          mask: var(--ic) center / contain no-repeat;
+  flex-shrink: 0;
+}
+.icon-sm { width: 16px; height: 16px; }
+.icon-md { width: 20px; height: 20px; }
+.icon-lg { width: 24px; height: 24px; }
+
+/* Common Vuesax names used by the kit */
+.i-close     { --ic: url("https://api.iconify.design/vuesax-linear/close.svg"); }
+.i-search    { --ic: url("https://api.iconify.design/vuesax-linear/search-normal.svg"); }
+.i-glass     { --ic: url("https://api.iconify.design/vuesax-linear/glass.svg"); }
+.i-arrow-down  { --ic: url("https://api.iconify.design/vuesax-linear/arrow-down.svg"); }
+.i-arrow-right { --ic: url("https://api.iconify.design/vuesax-linear/arrow-right.svg"); }
+.i-arrow-left  { --ic: url("https://api.iconify.design/vuesax-linear/arrow-left.svg"); }
+.i-arrow-up    { --ic: url("https://api.iconify.design/vuesax-linear/arrow-up.svg"); }
+.i-calendar  { --ic: url("https://api.iconify.design/vuesax-linear/calendar.svg"); }
+.i-eye       { --ic: url("https://api.iconify.design/vuesax-linear/eye.svg"); }
+.i-add-circle { --ic: url("https://api.iconify.design/vuesax-linear/add-circle.svg"); }
+.i-home      { --ic: url("https://api.iconify.design/vuesax-linear/home-2.svg"); }
+.i-info-circle-bold { --ic: url("https://api.iconify.design/vuesax-bold/info-circle.svg"); }
+.i-tick-circle-bold { --ic: url("https://api.iconify.design/vuesax-bold/tick-circle.svg"); }
+.i-close-circle-bold { --ic: url("https://api.iconify.design/vuesax-bold/close-circle.svg"); }
+.i-warning-bold { --ic: url("https://api.iconify.design/vuesax-bold/warning-2.svg"); }
+.i-3dcube-bold  { --ic: url("https://api.iconify.design/vuesax-bold/3dcube.svg"); }
+.i-setting   { --ic: url("https://api.iconify.design/vuesax-linear/setting-2.svg"); }
+.i-import    { --ic: url("https://api.iconify.design/vuesax-linear/import.svg"); }
+.i-document  { --ic: url("https://api.iconify.design/vuesax-linear/document.svg"); }
+.i-user      { --ic: url("https://api.iconify.design/vuesax-linear/user.svg"); }
+.i-bell      { --ic: url("https://api.iconify.design/vuesax-linear/notification.svg"); }
+.i-box       { --ic: url("https://api.iconify.design/vuesax-linear/box.svg"); }
+.i-truck     { --ic: url("https://api.iconify.design/vuesax-linear/truck-fast.svg"); }
+.i-chart     { --ic: url("https://api.iconify.design/vuesax-linear/chart.svg"); }

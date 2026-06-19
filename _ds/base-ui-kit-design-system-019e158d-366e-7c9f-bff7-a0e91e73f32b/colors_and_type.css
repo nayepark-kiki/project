@@ -1,0 +1,211 @@
+/* =====================================================================
+   Base UI Kit — colors & type
+   Source: Figma "Base UI Kit_Web Dashboard.fig"
+   Korean (primary) + English (secondary) mid-fidelity web dashboard kit.
+   ===================================================================== */
+
+/* ---------- Webfont imports -------- */
+/* Pretendard — local brand font files (user-uploaded) */
+@font-face { font-family: "Pretendard"; font-style: normal; font-weight: 100; src: url("fonts/Pretendard-Thin.ttf") format("truetype"); font-display: swap; }
+@font-face { font-family: "Pretendard"; font-style: normal; font-weight: 200; src: url("fonts/Pretendard-ExtraLight.ttf") format("truetype"); font-display: swap; }
+@font-face { font-family: "Pretendard"; font-style: normal; font-weight: 300; src: url("fonts/Pretendard-Light.ttf") format("truetype"); font-display: swap; }
+@font-face { font-family: "Pretendard"; font-style: normal; font-weight: 400; src: url("fonts/Pretendard-Regular.ttf") format("truetype"); font-display: swap; }
+@font-face { font-family: "Pretendard"; font-style: normal; font-weight: 500; src: url("fonts/Pretendard-Medium.ttf") format("truetype"); font-display: swap; }
+@font-face { font-family: "Pretendard"; font-style: normal; font-weight: 600; src: url("fonts/Pretendard-SemiBold.ttf") format("truetype"); font-display: swap; }
+@font-face { font-family: "Pretendard"; font-style: normal; font-weight: 700; src: url("fonts/Pretendard-Bold.ttf") format("truetype"); font-display: swap; }
+@font-face { font-family: "Pretendard"; font-style: normal; font-weight: 800; src: url("fonts/Pretendard-ExtraBold.ttf") format("truetype"); font-display: swap; }
+@font-face { font-family: "Pretendard"; font-style: normal; font-weight: 900; src: url("fonts/Pretendard-Black.ttf") format("truetype"); font-display: swap; }
+/* Noto Sans KR + Inter — Google Fonts (substitutes for Pretendard GOV / Product Sans) */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Inter:wght@400;500;700&display=swap");
+
+:root {
+  /* =================================================================
+     COLOR — base tokens
+     ================================================================= */
+
+  /* Gray ramp (the 100-step swatch row from the style guide) */
+  --gray-0:   #FFFFFF;
+  --gray-5:   #FBFBFB;
+  --gray-10:  #F5F5F5;
+  --gray-20:  #EEEEEE;
+  --gray-30:  #DDDDDD;
+  --gray-40:  #CCCCCC;
+  --gray-50:  #B0B0B0;
+  --gray-60:  #999999;
+  --gray-70:  #7C7C7C;
+  --gray-80:  #5C5C5C;
+  --gray-90:  #404040;
+  --gray-100: #17191C;
+  --black:    #131416;
+
+  /* Primary blue (most-used accent — buttons, links, focus) */
+  --primary-5:   #ECF2FE;
+  --primary-10:  #D8E5FD;
+  --primary-30:  #A8C3FB;
+  --primary-50:  #256EF4;
+  --primary-60:  #2A41CC;
+  --primary-70:  #083891;
+  --primary-80:  #052B57;
+
+  /* System / semantic */
+  --danger-5:   #FEF2F2;
+  --danger-10:  #FFD8D8;
+  --danger-50:  #FB2C36;
+  --danger-70:  #C20D17;
+
+  --success-5:  #E6FAEA;
+  --success-50: #00A419;
+  --success-70: #007513;
+
+  --info-5:     #ECF2FE;
+  --info-10:    #D8E5FD;
+  --info-50:    #256EF4;
+
+  /* Deep accents — used by gov-style table strokes */
+  --navy-strong:  #063A74;
+  --navy-deepest: #052B57;
+
+  /* =================================================================
+     COLOR — semantic
+     ================================================================= */
+  --bg-app:      var(--gray-10);     /* page background */
+  --bg-surface:  var(--gray-0);      /* card / module */
+  --bg-surface-2: var(--gray-5);     /* nested card */
+  --bg-sidebar:  var(--gray-90);     /* left GNB */
+  --bg-sidebar-selected: var(--gray-80);
+  --bg-overlay:  rgba(0,0,0,0.75);   /* modal scrim */
+
+  --fg-strong:   #292D32;            /* most-used text color in the system */
+  --fg-default:  var(--gray-100);
+  --fg-muted:    var(--gray-80);
+  --fg-subtle:   var(--gray-60);
+  --fg-disabled: var(--gray-50);
+  --fg-on-dark:  #FFFFFF;
+  --fg-on-primary: #FFFFFF;
+  --fg-link:     var(--primary-50);
+
+  --border-default: var(--gray-30);
+  --border-strong:  var(--gray-50);
+  --border-subtle:  var(--gray-20);
+  --border-dashed:  var(--gray-50);  /* used for documentation dividers */
+  --border-focus:   var(--primary-50);
+  --border-header-row: var(--navy-strong);
+
+  /* =================================================================
+     RADII
+     ================================================================= */
+  --radius-xs:    2px;   /* logo container */
+  --radius-sm:    6px;   /* badges */
+  --radius-md:    8px;   /* buttons, inputs */
+  --radius-lg:    12px;
+  --radius-xl:    16px;  /* cards, info banners */
+  --radius-pill:  100px;
+
+  /* =================================================================
+     SPACING (4px grid)
+     ================================================================= */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-7:  28px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-13: 52px;
+  --space-16: 64px;
+
+  /* =================================================================
+     ELEVATION
+     ================================================================= */
+  --shadow-xs: 0 1px 2px rgba(0,0,0,0.02);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+  --shadow-md: 6px 2px 10px rgba(0,0,0,0.05); /* sidebar offset */
+  --shadow-modal: 0 8px 32px rgba(0,0,0,0.12);
+
+  /* =================================================================
+     LAYOUT
+     ================================================================= */
+  --sidebar-w: 300px;
+  --header-h:  72px;
+  --content-pad-x: 64px;
+  --content-pad-y: 40px;
+
+  /* =================================================================
+     TYPE — families
+     ================================================================= */
+  --font-ko-gov:  "Pretendard GOV", "Pretendard", "Noto Sans KR", system-ui, sans-serif;
+  --font-ko:      "Pretendard", "Noto Sans KR", system-ui, sans-serif;
+  --font-ko-noto: "Noto Sans KR", "Pretendard", system-ui, sans-serif;
+  --font-latin:   "Inter", system-ui, sans-serif;
+  --font-display: "Inter", "Product Sans", system-ui, sans-serif; /* Product Sans fallback */
+
+  /* =================================================================
+     TYPE — scale (px, line-height 1.5 throughout)
+     ================================================================= */
+  --fs-display-lg: 64px;
+  --fs-display-md: 48px;
+  --fs-display-sm: 40px;
+
+  --fs-h-lg:  32px;
+  --fs-h-md:  28px;
+  --fs-h-sm:  24px;
+  --fs-h-xs:  19px;
+  --fs-h-xxs: 17px;
+
+  --fs-body-lg:  19px;
+  --fs-body-md:  17px;
+  --fs-body-sm:  15px;
+  --fs-body-xs:  13px;
+
+  --lh-tight: 1.2;
+  --lh-base:  1.5;
+
+  --tracking-display: -0.030em;
+  --tracking-base:    0;
+}
+
+/* =====================================================================
+   SEMANTIC TYPE CLASSES
+   ===================================================================== */
+.t-display-lg { font: 700 var(--fs-display-lg)/var(--lh-tight) var(--font-display); letter-spacing: var(--tracking-display); color: var(--fg-default); }
+.t-display-md { font: 700 var(--fs-display-md)/var(--lh-tight) var(--font-display); letter-spacing: var(--tracking-display); color: var(--fg-default); }
+.t-display-sm { font: 700 var(--fs-display-sm)/var(--lh-tight) var(--font-display); letter-spacing: var(--tracking-display); color: var(--fg-default); }
+
+.t-h-lg  { font: 700 var(--fs-h-lg)/var(--lh-base) var(--font-ko-gov); color: var(--fg-default); }
+.t-h-md  { font: 700 var(--fs-h-md)/var(--lh-base) var(--font-ko-gov); color: var(--fg-default); }
+.t-h-sm  { font: 700 var(--fs-h-sm)/var(--lh-base) var(--font-ko-gov); color: var(--fg-default); }
+.t-h-xs  { font: 700 var(--fs-h-xs)/var(--lh-base) var(--font-ko-gov); color: var(--fg-default); }
+.t-h-xxs { font: 700 var(--fs-h-xxs)/var(--lh-base) var(--font-ko-gov); color: var(--fg-default); }
+
+.t-body-lg  { font: 400 var(--fs-body-lg)/var(--lh-base) var(--font-ko-gov); color: var(--fg-muted); }
+.t-body-md  { font: 400 var(--fs-body-md)/var(--lh-base) var(--font-ko-gov); color: var(--fg-muted); }
+.t-body-sm  { font: 400 var(--fs-body-sm)/var(--lh-base) var(--font-ko-gov); color: var(--fg-muted); }
+.t-body-xs  { font: 400 var(--fs-body-xs)/var(--lh-base) var(--font-ko-gov); color: var(--fg-muted); }
+
+.t-body-lg-b { font-weight: 700; }
+.t-body-md-b { font-weight: 700; }
+
+/* Base reset for documents using this system */
+html, body {
+  margin: 0;
+  font-family: var(--font-ko-gov);
+  font-size: var(--fs-body-md);
+  line-height: var(--lh-base);
+  color: var(--fg-strong);
+  background: var(--bg-surface);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1 { font: 700 var(--fs-h-lg)/var(--lh-base) var(--font-ko-gov); margin: 0; color: var(--fg-default); }
+h2 { font: 700 var(--fs-h-md)/var(--lh-base) var(--font-ko-gov); margin: 0; color: var(--fg-default); }
+h3 { font: 700 var(--fs-h-sm)/var(--lh-base) var(--font-ko-gov); margin: 0; color: var(--fg-default); }
+h4 { font: 700 var(--fs-h-xs)/var(--lh-base) var(--font-ko-gov); margin: 0; color: var(--fg-default); }
+h5 { font: 700 var(--fs-h-xxs)/var(--lh-base) var(--font-ko-gov); margin: 0; color: var(--fg-default); }
+p  { font-size: var(--fs-body-md); line-height: var(--lh-base); color: var(--fg-muted); margin: 0; }
+small { font-size: var(--fs-body-xs); color: var(--fg-subtle); }
+
+a { color: var(--fg-link); text-decoration: none; }
+a:hover { text-decoration: underline; }
