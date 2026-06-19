@@ -4,14 +4,12 @@ This file is the fallback Markdown guide for the design system page. In the brow
 
 ## Core Principles
 
-- Prioritize the lower-center HUD area for primary work guidance.
-- Use the center area only for scan success, scan failure, danger warnings, task completion, or required user confirmation.
-- Keep top and side areas for secondary information and actions.
-- For always-visible work information, prefer one primary line plus one secondary line. Use three lines only when necessary.
-- Do not overload the HUD with information or UI controls. Show only the minimum information needed for the task.
-- Break work guidance into small steps because smart glass screens are narrow.
-- Provide immediate visual and voice feedback for success and failure states.
-- Treat displayed information such as BIN, SKU, model name, terminology, key colors, and task order as project-specific.
+1. Show only the current task as the highlighted primary information, and remove completed steps from the screen so the user focuses on the single action to do now.
+2. Do not keep completed work history in the highlighted area. Make it available in the secondary area when needed, to prevent unintended return to a previous step.
+3. Place must-see core UI in the lower-center area, which is most visible during work and more stable when wearing a hard hat. Put secondary information that does not need constant checking in the top-center area, and use the center area only for momentary states such as scan success, scan failure, danger warning, task completion, or required confirmation.
+4. Deliver success and failure on two channels at once — visual (color change, status message) and audio (sound effect, voice guidance) — to reduce misrecognition and prevent missed feedback in any work environment.
+5. For always-visible work information, prefer one primary line plus one secondary line, and use three lines only when necessary. Do not overload the screen with information or UI controls; show only the minimum information needed for the task.
+6. Define the actual displayed information (BIN, SKU, model name, etc.) and key colors per project.
 
 ## Visual Style Direction
 
@@ -150,13 +148,13 @@ When generating a screen, compose it in this order:
 | `font/data/lg` | 30px / 800 | Large primary data |
 | `font/data/md` | 28px / 800 | Medium primary data |
 | `font/data/sm` | 24px / 800 | Small primary data |
-| `font/instruction/main` | 24px / 600 | Primary work instruction |
-| `font/button/main` | 20px / 600 | Primary button text |
 | `font/info/lg` | 24px / 600 | Large secondary information |
 | `font/info/md` | 20px / 600 | Medium secondary information |
 | `font/info/sm` | 18px / 600 | Small secondary information |
-| `font/button/sub` | 18px / 600 | Secondary button text |
 | `font/caption` | 16px / 600 | Caption and secondary status text |
+| `font/instruction/main` | 24px / 600 | Primary work instruction |
+| `font/button/main` | 20px / 600 | Primary button text |
+| `font/button/sub` | 18px / 600 | Secondary button text |
 
 ### Safe Area and Spacing Tokens
 
