@@ -25,20 +25,18 @@
     </header>
 
     <section class="hero">
-      <div style="position: relative">
+      <div>
         <p class="eyebrow">내부 실무용 디자인 시스템</p>
-        
-        <h1>물류용 스마트글라스 화면을<br>빠르게 설계하기 위한 공통 기준</h1><p class="lead">
+        <h1>물류용 스마트글라스 화면을<br>빠르게 설계하기 위한 공통 기준</h1>
+        <p class="lead">
           기획/디자이너는 화면 판단 기준을 훑고, 개발자는 토큰과 컴포넌트 값을 바로 가져갈 수 있도록<br>정리한 실무형 디자인 시스템 페이지입니다.
         </p>
         <a class="hero-doc-link" href="design.md" download="design.md" data-save-picker="">
           <span class="hero-doc-icon" aria-hidden="true"></span>
-          <span>AI용 design.md 다운로드</span>
+          <span>Design.md 다운로드</span>
         </a>
       </div>
     </section>
-
-    
 
     <section id="planner" class="section planner-section">
       <div class="section-header">
@@ -70,7 +68,9 @@
           </div>
         </article>
       </div>
-    </section><section id="principles" class="section principles-section" style="display: grid">
+    </section>
+
+    <section id="principles" class="section principles-section">
       <div class="section-header">
         <div>
           <h2>공통 원칙</h2>
@@ -78,63 +78,46 @@
             피킹과 재고조사뿐 아니라 모든 물류용 스마트글라스 화면에 적용하는 기본 판단 기준입니다.
           </p>
         </div>
-      </div><div class="principle-grid">
+      </div>
+      <div class="principle-grid">
         <article class="panel">
-          <div class="principle-text">
-            <p class="principle-number">01</p>
-            <h3>현재 작업만 노출</h3>
-            <p>현재 수행할 작업만 주요 정보로 강조하여 표시하고,<br>완료된 단계는 화면에서 제거하여 지금 해야 할 하나에 대한 집중을 유도합니다.</p>
-          </div>
-          <figure class="principle-figure">
-            <img src="assets/smart-glass/principle-current-task.png" alt="복잡한 작업 목록 대신 현재 작업만 노출한 화면 비교">
-          </figure>
+          <p class="principle-number">01</p>
+          <h3>현재 작업만 노출</h3>
+          <p>현재 수행할 작업만 주요 정보로 강조하여 표시하고,
+<br>완료된 단계는 화면에서 제거하여 지금 해야 할 하나에 대한 집중을 유도합니다.</p>
+        </article><article class="panel">
+              <p class="principle-number">02</p>
+              <h3>이전 정보는 보조 영역에서</h3>
+              <p>완료된 작업 내역은 강조 영역에 두지 않고,
+필요할 때 보조 영역에서 확인 가능하게 하여</p><div>의도치 않은 이전 단계 복귀를 방지합니다.</div><p></p>
+            </article>
+        <article class="panel">
+          <p class="principle-number">03</p>
+          <h3>하단 중앙은 핵심 / 상단 중앙은 보조</h3>
+          <p>작업 중 가장 잘 보이는 하단 중앙에는 즉시 확인해야 하는 핵심 UI 배치합니다.
+안전모 착용 시 하단 영역이 더 안정적으로 보일 수 있습니다.
+상시 확인이 필요 없는 보조 정보는 상단 중앙에 배치합니다.</p>
+        </article><article class="panel">
+          <p class="principle-number">04</p>
+          <h3>확실한 시각·청각 피드백</h3>
+          <p>자동 화면 전환, 오인식 상황을 줄이기 위해 <br>성공과 실패를 시각(색상 변화, 상태 메시지)과 청각(효과음, 음성 안내) 두 채널로 동시 전달하여 <br>어떤 작업 환경에서든 피드백 누락 방지</p>
         </article>
         <article class="panel">
-          <div class="principle-text">
-            <p class="principle-number">02</p>
-            <h3>이전 정보는 보조 영역에서</h3>
-            <p>완료된 작업 내역은 강조 영역에 두지 않고, 필요할 때 보조 영역에서 확인 가능하게 하여<br>의도치 않은 이전 단계 복귀를 방지합니다.</p>
-          </div>
-          <figure class="principle-figure"><div class="figure-slot">이미지 영역</div></figure>
+          <p class="principle-number">05</p>
+          <h3>최대 3줄</h3>
+          <p>상시 노출되는 작업 정보는 1줄 핵심 + 1줄 보조를 권장하며, 필요한 경우에만 3줄을 사용합니다.<br>정보와 UI 요소를 과도하게 담지 않고, 작업에 필요한 최소 정보만 노출합니다.</p>
         </article>
+            
         <article class="panel">
-          <div class="principle-text">
-            <p class="principle-number">03</p>
-            <h3>하단 중앙은 핵심 / 상단 중앙은 보조</h3>
-            <p>작업 중 가장 잘 보이는 하단 중앙에는 즉시 확인해야 하는 핵심 UI 배치합니다. 안전모 착용 시 하단 영역이 더 안정적으로 보일 수 있습니다. 상시 확인이 필요 없는 보조 정보는 상단 중앙에 배치합니다.</p>
-          </div>
-          <figure class="principle-figure"><div class="figure-slot">이미지 영역</div></figure>
-        </article>
-        <article class="panel">
-          <div class="principle-text">
-            <p class="principle-number">04</p>
-            <h3>확실한 시각·청각 피드백</h3>
-            <p>자동 화면 전환, 오인식 상황을 줄이기 위해 <br>성공과 실패를 시각(색상 변화, 상태 메시지)과 청각(효과음, 음성 안내) 두 채널로 동시 전달하여 <br>어떤 작업 환경에서든 피드백 누락 방지</p>
-          </div>
-          <figure class="principle-figure"><div class="figure-slot">이미지 영역</div></figure>
-        </article>
-        <article class="panel">
-          <div class="principle-text">
-            <p class="principle-number">05</p>
-            <h3>최대 3줄</h3>
-            <p>상시 노출되는 작업 정보는 1줄 핵심 + 1줄 보조를 권장하며, 필요한 경우에만 3줄을 사용합니다.<br>정보와 UI 요소를 과도하게 담지 않고, 작업에 필요한 최소 정보만 노출합니다.</p>
-          </div>
-          <figure class="principle-figure"><div class="figure-slot">이미지 영역</div></figure>
-        </article>
-        <article class="panel">
-          <div class="principle-text">
-            <p class="principle-number">06</p>
-            <h3 style="font-weight: 700">표시 정보는 프로젝트별로 정의</h3>
-            <p style="font-weight: 400">실제 표시 정보(BIN, SKU, 모델명 등), 주요 컬러는 프로젝트별로 정의합니다.</p>
-          </div>
-          <figure class="principle-figure"><div class="figure-slot">이미지 영역</div></figure>
+          <p class="principle-number">06</p>
+          <h3 style="font-weight: 700">표시 정보는 프로젝트별로 정의</h3>
+          <p style="font-weight: 400">실제 표시 정보(BIN, SKU, 모델명 등), 주요 컬러는 프로젝트별로 정의합니다.</p>
         </article>
       </div>
-      
     </section>
 
-    <section id="tokens" class="section" style="display: grid; flex-direction: column; gap: 20px">
-      <div class="section-header" style="position: static; display: grid">
+    <section id="tokens" class="section">
+      <div class="section-header">
         <div>
           <h2>토큰</h2>
           <p class="section-desc">
@@ -159,7 +142,7 @@
             </thead>
             <tbody>
               <tr>
-                <td class="token-type" style="font-weight: 700">Surface</td>
+                <td class="token-type">Surface</td>
                 <td>행동 지시(바코드 스캔)</td>
                 <td class="token-name">color/background/primary-scan</td>
                 <td><span class="token-value color-token-value"><span class="swatch" style="background:#003CFF"></span><span class="token-editable" data-token-value="" contenteditable="plaintext-only" spellcheck="false">#003CFF</span><button class="copy-button copy-icon" data-copy="#003CFF" aria-label="#003CFF 복사" title="#003CFF 복사"></button></span></td>
@@ -356,87 +339,75 @@
                 <th>유형</th>
                 <th>토큰</th>
                 <th>사용처</th>
-                <th>폰트 사이즈</th>
-                <th>두께</th>
+                <th>값</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td class="token-type">Common</td>
+                <td class="token-type">공통</td>
                 <td class="token-name">font/family/base</td>
-                <td>기본 폰트</td>
+                <td>기본 UI 폰트</td>
                 <td class="token-value"><span class="token-editable" data-token-value="" contenteditable="plaintext-only" spellcheck="false">Pretendard</span></td>
-                <td class="token-value">—</td>
               </tr>
               <tr>
-                <td class="token-type">Primary</td>
-                <td class="token-name"><span class="token-copy-text" data-copy="font/data/lg" role="button" tabindex="0" aria-label="font/data/lg 복사" title="font/data/lg 복사">font/Primary/lg<br></span></td>
-                <td>주 작업 정보</td>
-                <td class="token-value"><span class="token-editable" data-token-value="" contenteditable="plaintext-only" spellcheck="false" style="font-size: 16px">30px</span></td>
-                <td class="token-value"><span class="token-editable" data-token-value="" contenteditable="plaintext-only" spellcheck="false" style="font-size: 16px">800</span></td>
+                <td class="token-type">주요 정보</td>
+                <td class="token-name">font/data/lg</td>
+                <td>주요 정보 대형</td>
+                <td class="token-value"><span class="token-editable" data-token-value="" contenteditable="plaintext-only" spellcheck="false">30px / 800</span></td>
               </tr>
               <tr>
-                <td class="token-type">Primary</td>
-                <td class="token-name"><span class="token-copy-text" data-copy="font/data/md" role="button" tabindex="0" aria-label="font/data/md 복사" title="font/data/md 복사">font/Primary/md<br></span></td>
-                <td>중형 주요 정보</td>
-                <td class="token-value"><span class="token-editable" data-token-value="" contenteditable="plaintext-only" spellcheck="false">28px</span></td>
-                <td class="token-value"><span class="token-editable" data-token-value="" contenteditable="plaintext-only" spellcheck="false" style="font-size: 16px">800</span></td>
+                <td class="token-type">주요 정보</td>
+                <td class="token-name">font/data/md</td>
+                <td>주요 정보 중형</td>
+                <td class="token-value"><span class="token-editable" data-token-value="" contenteditable="plaintext-only" spellcheck="false">28px / 800</span></td>
               </tr>
               <tr>
-                <td class="token-type">Primary</td>
-                <td class="token-name"><span class="token-copy-text" data-copy="font/data/sm" role="button" tabindex="0" aria-label="font/data/sm 복사" title="font/data/sm 복사">font/Primary/sm<br></span></td>
-                <td>소형 주요 정보</td>
-                <td class="token-value"><span class="token-editable" data-token-value="" contenteditable="plaintext-only" spellcheck="false">24px</span></td>
-                <td class="token-value"><span class="token-editable" data-token-value="" contenteditable="plaintext-only" spellcheck="false" style="font-size: 16px">800</span></td>
+                <td class="token-type">주요 정보</td>
+                <td class="token-name">font/data/sm</td>
+                <td>주요 정보 소형</td>
+                <td class="token-value"><span class="token-editable" data-token-value="" contenteditable="plaintext-only" spellcheck="false">24px / 800</span></td>
               </tr>
               <tr>
-                <td class="token-type">Sub</td>
-                <td class="token-name"><span class="token-copy-text" data-copy="font/info/lg" role="button" tabindex="0" aria-label="font/info/lg 복사" title="font/info/lg 복사">font/Sub/lg<br></span></td>
-                <td>서브 정보</td>
-                <td class="token-value"><span class="token-editable" data-token-value="" contenteditable="plaintext-only" spellcheck="false">24px</span></td>
-                <td class="token-value"><span class="token-editable" data-token-value="" contenteditable="plaintext-only" spellcheck="false" style="font-size: 16px">600</span></td>
+                <td class="token-type">서브 정보</td>
+                <td class="token-name">font/info/lg</td>
+                <td>서브 정보 대형</td>
+                <td class="token-value"><span class="token-editable" data-token-value="" contenteditable="plaintext-only" spellcheck="false">24px / 600</span></td>
               </tr>
               <tr>
-                <td class="token-type">Sub</td>
-                <td class="token-name"><span class="token-copy-text" data-copy="font/info/md" role="button" tabindex="0" aria-label="font/info/md 복사" title="font/info/md 복사">font/Sub/md<br></span></td>
-                <td>중형 서브 정보</td>
-                <td class="token-value"><span class="token-editable" data-token-value="" contenteditable="plaintext-only" spellcheck="false">20px</span></td>
-                <td class="token-value"><span class="token-editable" data-token-value="" contenteditable="plaintext-only" spellcheck="false" style="font-size: 16px">600</span></td>
+                <td class="token-type">서브 정보</td>
+                <td class="token-name">font/info/md</td>
+                <td>서브 정보 중형</td>
+                <td class="token-value"><span class="token-editable" data-token-value="" contenteditable="plaintext-only" spellcheck="false">20px / 600</span></td>
               </tr>
               <tr>
-                <td class="token-type">Sub</td>
-                <td class="token-name"><span class="token-copy-text" data-copy="font/info/sm" role="button" tabindex="0" aria-label="font/info/sm 복사" title="font/info/sm 복사">font/Sub/sm<br></span></td>
-                <td>소형 서브 정보</td>
-                <td class="token-value"><span class="token-editable" data-token-value="" contenteditable="plaintext-only" spellcheck="false">18px</span></td>
-                <td class="token-value"><span class="token-editable" data-token-value="" contenteditable="plaintext-only" spellcheck="false" style="font-size: 16px">600</span></td>
+                <td class="token-type">서브 정보</td>
+                <td class="token-name">font/info/sm</td>
+                <td>서브 정보 소형</td>
+                <td class="token-value"><span class="token-editable" data-token-value="" contenteditable="plaintext-only" spellcheck="false">18px / 600</span></td>
               </tr>
               <tr>
-                <td class="token-type">Sub</td>
-                <td class="token-name"><span class="token-copy-text" data-copy="font/caption" role="button" tabindex="0" aria-label="font/caption 복사" title="font/caption 복사">font/Sub/caption<br></span></td>
+                <td class="token-type">서브 정보</td>
+                <td class="token-name">font/caption</td>
                 <td>캡션, 보조 상태</td>
-                <td class="token-value"><span class="token-editable" data-token-value="" contenteditable="plaintext-only" spellcheck="false">16px</span></td>
-                <td class="token-value"><span class="token-editable" data-token-value="" contenteditable="plaintext-only" spellcheck="false" style="font-size: 16px">600</span></td>
+                <td class="token-value"><span class="token-editable" data-token-value="" contenteditable="plaintext-only" spellcheck="false">16px / 600</span></td>
               </tr>
               <tr>
-                <td class="token-type">Instruction</td>
+                <td class="token-type">지시</td>
                 <td class="token-name">font/instruction/main</td>
                 <td>주요 지시</td>
-                <td class="token-value"><span class="token-editable" data-token-value="" contenteditable="plaintext-only" spellcheck="false" style="font-size: 16px">24px</span></td>
-                <td class="token-value"><span class="token-editable" data-token-value="" contenteditable="plaintext-only" spellcheck="false" style="font-size: 16px">600</span></td>
+                <td class="token-value"><span class="token-editable" data-token-value="" contenteditable="plaintext-only" spellcheck="false">24px / 600</span></td>
               </tr>
               <tr>
-                <td class="token-type">Button</td>
+                <td class="token-type">버튼</td>
                 <td class="token-name">font/button/main</td>
                 <td>주요 버튼</td>
-                <td class="token-value"><span class="token-editable" data-token-value="" contenteditable="plaintext-only" spellcheck="false" style="font-size: 16px">20px</span></td>
-                <td class="token-value"><span class="token-editable" data-token-value="" contenteditable="plaintext-only" spellcheck="false" style="font-size: 16px">600</span></td>
+                <td class="token-value"><span class="token-editable" data-token-value="" contenteditable="plaintext-only" spellcheck="false">20px / 600</span></td>
               </tr>
               <tr>
-                <td class="token-type">Button</td>
+                <td class="token-type">버튼</td>
                 <td class="token-name">font/button/sub</td>
                 <td>서브 버튼</td>
-                <td class="token-value"><span class="token-editable" data-token-value="" contenteditable="plaintext-only" spellcheck="false">18px</span></td>
-                <td class="token-value"><span class="token-editable" data-token-value="" contenteditable="plaintext-only" spellcheck="false" style="font-size: 16px">600</span></td>
+                <td class="token-value"><span class="token-editable" data-token-value="" contenteditable="plaintext-only" spellcheck="false">18px / 600</span></td>
               </tr>
             </tbody>
           </table>

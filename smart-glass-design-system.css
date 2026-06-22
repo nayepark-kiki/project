@@ -558,6 +558,75 @@ h1 {
   font-size: 16px;
 }
 
+/* 공통 원칙 카드: 텍스트(좌) + 이미지 영역(우), 모바일에서 세로 적층 */
+.principles-section .principle-grid {
+  max-width: 1200px;
+}
+
+.principles-section .panel {
+  flex-direction: row;
+  align-items: center;
+  gap: 28px;
+  padding: 28px;
+  text-align: left;
+}
+
+.principles-section .principle-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1 1 0;
+  min-width: 0;
+  text-align: left;
+}
+
+.principles-section .principle-text h3,
+.principles-section .principle-text p {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.principles-section .principle-figure {
+  flex: 0 0 380px;
+  margin: 0;
+}
+
+.principles-section .principle-figure img,
+.principles-section .figure-slot {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
+}
+
+.principles-section .principle-figure img {
+  display: block;
+  height: auto;
+  object-fit: cover;
+  border: 1px solid var(--sg-line);
+}
+
+.principles-section .figure-slot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed var(--sg-line-strong);
+  background: var(--sg-surface-subtle);
+  color: var(--sg-text-soft);
+  font-size: 14px;
+}
+
+@media (max-width: 760px) {
+  .principles-section .panel {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .principles-section .principle-figure {
+    flex: none;
+    width: 100%;
+  }
+}
+
 .token-toolbar {
   display: flex;
   align-items: center;
@@ -590,6 +659,26 @@ h1 {
   border-bottom: 1px solid var(--sg-line);
   text-align: left;
   vertical-align: middle;
+}
+
+.token-table th:not(:last-child),
+.token-table td:not(:last-child) {
+  border-right: 1px solid var(--sg-line);
+}
+
+/* 헤더(타이틀) 하단 구분선 */
+.token-table thead th {
+  border-bottom: 1px solid #adb2bd;
+}
+
+/* 유형 그룹 경계: 그룹의 마지막 행 하단에 구분선 (border-collapse에서 위쪽 셀이 우선) */
+.token-table tbody tr:has(+ tr td.token-type) td {
+  border-bottom: 1px solid #adb2bd;
+}
+
+/* 유형 셀은 rowspan으로 병합되므로, 다음 그룹이 있을 때 직접 하단선 지정 */
+.token-table tbody tr:has(td.token-type):has(~ tr td.token-type) td.token-type {
+  border-bottom: 1px solid #adb2bd;
 }
 
 .token-table th:nth-child(1),
@@ -692,6 +781,28 @@ h1 {
 .spacing-token-table th:nth-child(4),
 .spacing-token-table td:nth-child(4) {
   width: 20%;
+  text-align: center;
+}
+
+.typography-token-table th:nth-child(2),
+.typography-token-table td:nth-child(2) {
+  width: 28%;
+}
+
+.typography-token-table th:nth-child(3),
+.typography-token-table td:nth-child(3) {
+  width: 26%;
+}
+
+.typography-token-table th:nth-child(4),
+.typography-token-table td:nth-child(4) {
+  width: 12%;
+  text-align: center;
+}
+
+.typography-token-table th:nth-child(5),
+.typography-token-table td:nth-child(5) {
+  width: 18%;
   text-align: center;
 }
 
@@ -1275,6 +1386,11 @@ h1 {
 
 .voice-table tr:last-child td {
   border-bottom: 0;
+}
+
+.voice-table th:not(:last-child),
+.voice-table td:not(:last-child) {
+  border-right: 1px solid var(--sg-line);
 }
 
 .code-block {
