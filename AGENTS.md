@@ -2,8 +2,12 @@
 
 ## Project
 
-- Work in `/Users/eunjeelee/Downloads/claude-figma`.
-- Main page: `index.html`.
+- Work only in `/Users/eunjeelee/Desktop/2026/project`.
+- Do not use `/Users/eunjeelee/Downloads/claude-figma` as the project source.
+- Main page: `index.dc.html`.
+- `index.html` is not the default edit target; edit it only when the user explicitly asks.
+- `index-original-backup.html` is backup only.
+- Browser preview: `file:///Users/eunjeelee/Desktop/2026/project/index.dc.html`.
 - Main styles: `smart-glass-design-system.css`.
 - Main scripts: `smart-glass-design-system.js`.
 - AI guide output/source: `design.md`.
