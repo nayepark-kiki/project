@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>현장 작업 보고 · 프로토타입</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+:root{
+  --brand:#0066ff; --btn:#1a7aff; --brand-strong:#0057db; --brand-soft:#ebf3ff;
+  --fg:#1a1a1a; --sub:#383838; --muted:#6b6b6b; --line:#dfdfdf; --line2:#e8e8e8; --tline:#c8c8c8; --bg:#f5f5f5; --card:#ffffff;
+  --font:'Pretendard','Noto Sans KR','Apple SD Gothic Neo',system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font);font-size:15px;line-height:1.5}
+a{color:var(--brand)}a:hover{color:#0047b8}
+button,input,select,textarea{font:inherit;color:inherit}
+input::placeholder,textarea::placeholder{color:#777}
+button{cursor:pointer}
+button:disabled{cursor:not-allowed}
+:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);margin:0}
+.m-only{display:none!important}
+.card{background:var(--card);border-radius:8px;padding:24px}
+.wrap{max-width:1280px;margin:0 auto;padding:24px 32px 48px}
+.stack{display:flex;flex-direction:column}
+.row{display:flex;align-items:center}
+.wrapflex{display:flex;flex-wrap:wrap;align-items:center}
+.muted{color:var(--sub)}
+.small{font-size:13px}
+
+/* header */
+.hdr{background:#fff;border-bottom:1px solid var(--line);padding:14px 32px;display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px}
+.brand i{width:32px;height:32px;border-radius:8px;background:var(--brand);color:#fff;display:flex;align-items:center;justify-content:center}
+.pcnav{display:flex;gap:4px}
+.pcnav a{display:flex;align-items:center;height:40px;padding:0 14px;border-radius:6px;color:var(--sub);text-decoration:none;font-weight:600}
+.pcnav a[aria-current="page"]{background:var(--brand-soft);color:var(--brand-strong);font-weight:700}
+.hdr-right{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:14px;color:var(--sub)}
+.badge{font-size:12px;font-weight:700;border-radius:999px;padding:2px 10px}
+.badge.admin{background:#1a1a1a;color:#fff}
+.badge.worker{background:var(--brand-soft);color:var(--brand-strong)}
+.linkbtn{background:none;border:0;padding:8px 2px;color:var(--brand);text-decoration:underline;font-size:14px}
+.mhdr{background:#fff;border-bottom:1px solid var(--line)}
+.mhdr .top{display:flex;align-items:center;gap:8px;padding:12px 16px 2px}
+.mhdr .site{font-weight:700;font-size:16px;flex:1 1 auto;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mtabs{display:flex;padding:0 8px}
+.mtabs a{flex:1 1 0;display:flex;align-items:center;justify-content:center;height:44px;font-weight:600;color:var(--sub);text-decoration:none;border-bottom:2px solid transparent}
+.mtabs a[aria-current="page"]{font-weight:700;color:var(--brand-strong);border-bottom-color:var(--brand)}
+
+/* form controls */
+.field{display:flex;flex-direction:column;gap:8px}
+.label{font-weight:600}
+.req{color:var(--brand)}
+.opt{font-weight:400;font-size:13px;color:var(--sub)}
+.input{height:48px;padding:0 14px;border:1px solid var(--line);border-radius:8px;background:#fff;font-size:16px;width:100%}
+textarea.input{height:auto;padding:12px 14px;resize:vertical}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{height:40px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:#fff;font-size:15px}
+.chip[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:#fff;font-weight:600}
+.btn{height:48px;padding:0 20px;border-radius:8px;border:0;background:var(--btn);color:#fff;font-weight:600;font-size:16px;display:inline-flex;align-items:center;justify-content:center;gap:6px;text-decoration:none}
+.btn:hover{color:#fff}
+.btn.lg{height:56px;font-size:17px}
+.btn.line{background:#fff;color:var(--btn);border:1px solid var(--btn)}
+.btn.ghost{background:#fff;color:var(--fg);border:1px solid var(--line)}
+.btn.sm{height:36px;padding:0 12px;font-size:14px}
+.btn:disabled{background:#e8e8e8;color:var(--muted);border-color:#e8e8e8}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+
+/* tables */
+.t{width:100%;border-collapse:collapse;font-size:14px}
+.t th,.t td{border:1px solid var(--tline);padding:8px 10px;vertical-align:middle}
+.t thead th{background:var(--bg);font-weight:600;text-align:center}
+.t .num{text-align:right;font-variant-numeric:tabular-nums}
+.t .c{text-align:center}
+.t tfoot th,.t tfoot td{background:var(--bg);font-weight:700}
+.scrollx{overflow-x:auto}
+.subrow{padding:6px 10px;border-top:1px solid var(--line2);display:flex;gap:8px;font-size:13px}
+.subrow b{flex-shrink:0;width:56px}
+.mt{width:100%;border-collapse:collapse;font-size:15px;line-height:1.45}
+.mt td{padding:7px 14px;border-top:1px solid #f0f0f0}
+.mt tr.mt-first td{border-top-color:var(--tline)}
+.mt td.mt-dong{width:64px;padding:7px 10px 7px 14px;border-right:1px solid #f0f0f0;vertical-align:top;font-weight:600;white-space:nowrap}
+.mt td.mt-risk{font-size:14px}.mt td.mt-risk b{display:inline-block;width:60px}
+
+/* dashboard */
+.kpi{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.kpi div{background:#fff;border-radius:8px;padding:16px 20px;display:flex;flex-direction:column}
+.kpi strong{font-size:28px;line-height:1.3}
+.kpi strong small{font-size:15px;color:var(--sub);font-weight:600}
+.filter{position:sticky;top:0;z-index:3;background:var(--bg);padding:8px 0;display:flex;gap:8px;overflow-x:auto}
+.fchip{flex-shrink:0;height:36px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:#fff;font-weight:600;font-size:14px;white-space:nowrap}
+.fchip span{font-weight:400}
+.fchip[aria-pressed="true"]{background:#1a1a1a;border-color:#1a1a1a;color:#fff}
+.pair{display:flex;gap:20px;align-items:flex-start}
+.pair>*{flex:1 1 0;min-width:0}
+.item{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;padding:10px 12px;background:var(--bg);border-radius:6px}
+.item .grow{flex:1 1 200px;min-width:0;display:flex;flex-direction:column}
+
+/* report */
+.cols{display:flex;gap:20px;align-items:flex-start}
+.side{flex:0 0 260px;background:#fff;border-radius:8px;padding:20px;display:flex;flex-direction:column;gap:10px}
+.mainc{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:12px}
+.tabrow{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:6px;width:100%;font-size:15px;border:1px dashed #949494;background:#fff;color:var(--sub);text-align:left}
+.tabrow.done{border:1px solid var(--line)}
+.tabrow.active{background:#1a1a1a;color:#fff;border:1px solid #1a1a1a}
+.dot{width:20px;height:20px;border-radius:999px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border:1.5px dashed #949494}
+.done .dot{background:var(--brand);color:#fff;border:0}
+.active .dot{border-color:#fff}
+.active.done .dot{background:#fff;color:#1a1a1a}
+.mchips{background:#fff;border-bottom:1px solid var(--line)}
+.stickytop{position:sticky;top:0;z-index:5}
+.mchips-in{max-width:1280px;margin:0 auto;padding:12px 32px;display:flex;gap:8px;align-items:center;overflow-x:auto}
+@media (max-width:767px){.mchips-in{padding:12px 16px}}
+.tchip{flex-shrink:0;display:flex;align-items:center;gap:4px;height:36px;padding:0 14px;border-radius:999px;font-size:14px;font-weight:500;white-space:nowrap;background:#fff;color:var(--sub);border:1px dashed #949494}
+.tchip.done{border:1px solid var(--line)}
+.tchip.done svg{color:var(--brand)}
+.tchip.active{background:#1a1a1a;color:#fff;border:1px solid #1a1a1a;font-weight:700}
+.tchip.active svg{color:#fff}
+.pill{font-size:12px;font-weight:600;border-radius:999px;padding:2px 10px;background:var(--bg);color:var(--sub)}
+.pill.ok{background:var(--brand-soft);color:var(--brand-strong)}
+.eqrow{display:grid;grid-template-columns:minmax(0,1fr) 72px 64px 40px;gap:6px;align-items:center;max-width:560px}
+.eqrow .input{height:44px;font-size:15px;padding:0 10px}
+.mcta{display:none}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#1a1a1a;color:#fff;padding:10px 16px;border-radius:8px;font-size:14px;z-index:50;max-width:90vw}
+
+/* login */
+.login{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:48px 16px}
+.login .card{width:100%;max-width:420px;padding:40px 32px;border-radius:12px;display:flex;flex-direction:column;gap:32px}
+.login-cta{margin-top:auto}
+
+@media (max-width:767px){
+  .pc-only{display:none!important}
+  .m-only{display:block!important}
+  .m-only.fx{display:flex!important}
+  .wrap{padding:16px 16px 32px}
+  .card{padding:16px}
+  .kpi{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .kpi strong{font-size:24px}
+  .pair{flex-direction:column;gap:16px}
+  .pair>*{width:100%;flex:none}
+  .cols{display:block}
+  .grid2{grid-template-columns:minmax(0,1fr)}
+  .mcta{display:block;position:sticky;bottom:0;background:#fff;border-top:1px solid var(--line);padding:10px 16px calc(16px + env(safe-area-inset-bottom,0px));z-index:4}
+  .login{padding:0;background:#fff;align-items:stretch}
+  .login .card{max-width:none;border-radius:0;padding:64px 24px 32px;min-height:100vh}
+  .login-cta{position:sticky;bottom:0;margin:auto -24px -32px;padding:12px 24px calc(24px + env(safe-area-inset-bottom,0px));background:#fff;border-top:1px solid var(--line)}
+}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="toast" class="toast" hidden></div>
+
+<script>
+(function () {
+  'use strict';
+  const KEY = 'swr-prototype-v1';
+  const SITE = '[현장명]';
+  const CHECK = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>';
+  const HOUSE = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"/><path d="M5 21V9l7-5 7 5v12"/><path d="M9 21v-6h6v6"/></svg>';
+  const BACK = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>';
+  const X = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg>';
+  const RECENT_DONG = ['1202동', '1203동', '1206동', '1207동'];
+  const TRADES = ['철근공', '목공(일반)', '보통인부(남자)', '비계공(일반)'];
+
+  function esc(v) { return String(v == null ? '' : v).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+  const R = (dong, floor, trade, count, work, risk, prevent) => ({ dong, floor, trade, count: String(count), work, risk: risk || '', prevent: prevent || '' });
+
+  function seed() {
+    return {
+      adminCode: '905117',
+      companies: [
+        { id: 'c1', name: 'A업체', code: '482915', cumPrev: 1457 },
+        { id: 'c2', name: 'B업체', code: '730264', cumPrev: 105 },
+        { id: 'c3', name: 'C업체', code: '158073', cumPrev: 0 }
+      ],
+      equipCumPrev: { '지게차|3.5': 25, '콘크리트펌프카|68': 9, '리프트|1': 64, 'H/D CRANE|70': 31, '크레인|84': 1 },
+      reports: [
+        { id: 'r1', companyId: 'c1', time: '09:15', edited: true, rows: [
+          R('1207동', 'B1~1', '직원(협력사)', 8, '현장관리, 도면검토, 먹메김'),
+          R('1202동', 'B1~1', '보통인부(남자)', 16, '안전시설물설치, 양수작업, 현장정리청소, 유도원'),
+          R('1202동', 'B1~1', '철근공', 22, '1206동 B1F 수직배근, 1207동 기초배근작업', '중량물 인양(철근 양중)', '신호수 배치, 인양 반경 출입 통제'),
+          R('1207동', 'B1~1', '보통인부(여자)', 3, '먹메김 및 레벨작업, 유도원'),
+          R('1206동', 'B1~1', '목공(일반)', 14, '1207동 기초형틀설치, 1206동 B1F 메모드설치, 1203동 버림틀설치'),
+          R('1206동', 'B1~1', '비계공(일반)', 3, '각 동 안전난간대 설치', '고소작업(단부)', '안전대 착용, 2인 1조'),
+          R('1206동', 'B1~1', '할석공', 1, '크랙보수 및 기초치핑할석')
+        ], equip: [{ name: '지게차', spec: '3.5', qty: '2' }, { name: '리프트', spec: '1', qty: '4' }], etc: '철근 자재 반입 (정문 → 1206동 앞 야적장)' },
+        { id: 'r2', companyId: 'c1', time: '13:40', edited: false, rows: [
+          R('1202동', 'B1~1', '시스템비계', 9, '저수조 합벽 타설비계설치 마감, 1202동 B1F 외부 시스템비계 설치', '고소작업(외부 비계 상부)', '추락방지망 설치, 안전대 착용'),
+          R('1203동', 'B1~1', '콘크리트공', 6, '1207동 잔여 버림타설, 1203동 버림타설'),
+          R('1202동', 'B1~1', '해체공', 1, '1202동 기초해체정리'),
+          R('1202동', 'B1~1', '정리공', 3, '1202동 기초정리')
+        ], equip: [{ name: '콘크리트펌프카', spec: '68', qty: '1' }, { name: 'H/D CRANE', spec: '70', qty: '1' }], etc: '' },
+        { id: 'r3', companyId: 'c2', time: '10:20', edited: false, rows: [
+          R('1203동', 'B1', '설비공', 4, '1203동 B1F 슬리브 매립'),
+          R('1207동', 'B1', '배관공', 3, 'B1F 우수배관 설치')
+        ], equip: [{ name: '크레인', spec: '84', qty: '1' }], etc: '설비 자재 하역 및 정리' }
+      ]
+    };
+  }
+
+  let store;
+  try { store = JSON.parse(localStorage.getItem(KEY)) || seed(); } catch (e) { store = seed(); }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(store)); } catch (e) { /* 저장 불가 환경은 메모리로만 동작 */ } }
+
+  const ui = { role: null, companyId: null, filter: '전체', confirmId: null, draft: null, step: 'edit', editingId: null, lastAction: null, compDraft: '', compDup: false, newCompId: null };
+  try { const s = JSON.parse(sessionStorage.getItem(KEY + '-session')); if (s) { ui.role = s.role; ui.companyId = s.companyId; } } catch (e) { /* 무시 */ }
+  function saveSession() { try { sessionStorage.setItem(KEY + '-session', JSON.stringify({ role: ui.role, companyId: ui.companyId })); } catch (e) { /* 무시 */ } }
+
+  let nid = Date.now();
+  const uid = (p) => p + (nid++).toString(36);
+  const now = () => { const d = new Date(); return String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0'); };
+  const company = (id) => store.companies.find((c) => c.id === id);
+  const cname = (id) => (company(id) ? company(id).name : '(삭제된 업체)');
+  function toast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => { t.hidden = true; }, 2200); }
+  function newCode() { const used = new Set(store.companies.map((c) => c.code).concat([store.adminCode])); let c; do { c = String(Math.floor(100000 + Math.random() * 900000)); } while (used.has(c)); return c; }
+  const emptyRow = () => ({ id: uid('b'), dong: '', floor: '', trade: '', count: '', work: '', risk: '', prevent: '' });
+  const REQ = [['dong', '건물(동)'], ['floor', '위치(층)'], ['trade', '직종'], ['count', '인원'], ['work', '작업내용']];
+  const missing = (b) => { const m = REQ.find(([k]) => !String(b[k]).trim() || (k === 'count' && !(Number(b.count) > 0))); return m ? m[1] : ''; };
+  const rowName = (b, i) => [b.dong.trim(), b.trade.trim()].filter(Boolean).join(' ') || '작업 ' + (i + 1);
+  const reportLabel = (r) => (r.rows[0] ? (r.rows[0].dong + ' ' + r.rows[0].trade) : '작업') + (r.rows.length > 1 ? ' 외 ' + (r.rows.length - 1) + '건' : '');
+
+  /* ---------- routing ---------- */
+  let current = (location.hash || '').slice(1) || 'login';
+  function go(r) { current = r; try { history.pushState(null, '', '#' + r); } catch (e) { /* 일부 환경은 주소 변경 불가 */ } render(); window.scrollTo(0, 0); }
+  window.addEventListener('hashchange', () => { current = (location.hash || '').slice(1) || 'login'; render(); });
+  window.addEventListener('popstate', () => { current = (location.hash || '').slice(1) || 'login'; render(); });
+  function route() {
+    const h = current;
+    if (!ui.role) return 'login';
+    if (h === 'report' && ui.role !== 'worker') return 'dashboard';
+    if (h === 'settings' && ui.role !== 'admin') return 'dashboard';
+    if (h === 'login') return ui.role === 'admin' ? 'dashboard' : 'report';
+    return ['report', 'dashboard', 'settings'].includes(h) ? h : 'dashboard';
+  }
+
+  /* ---------- header ---------- */
+  function header(cur) {
+    const items = [['dashboard', '오늘 작업 현황']].concat(ui.role === 'worker' ? [['report', '작업 보고']] : [['settings', '현장 설정']]);
+    const badge = ui.role === 'admin' ? '<span class="badge admin">관리자</span>' : '<span class="badge worker">작업자</span>';
+    const links = items.map(([k, l]) => `<a href="#${k}"${k === cur ? ' aria-current="page"' : ''}>${l}</a>`).join('');
+    return `
+      <header class="hdr pc-only">
+        <div class="brand"><i>${HOUSE}</i>현장 작업 보고</div>
+        <nav class="pcnav" aria-label="메뉴">${links}</nav>
+        <div class="hdr-right">${esc(SITE)} ${badge} <button type="button" class="linkbtn" data-act="logout">로그아웃</button></div>
+      </header>
+      <header class="mhdr m-only">
+        <div class="top"><span class="site">${esc(SITE)}</span>${badge}<button type="button" class="linkbtn" data-act="logout" style="font-size:13px">로그아웃</button></div>
+        <nav class="mtabs" aria-label="메뉴">${links}</nav>
+      </header>`;
+  }
+
+  /* ---------- login ---------- */
+  function viewLogin() {
+    return `<main class="login"><div class="card">
+      <div class="stack" style="gap:12px">
+        <div style="width:48px;height:48px;border-radius:12px;background:var(--brand-soft);color:var(--brand);display:flex;align-items:center;justify-content:center">${HOUSE}</div>
+        <h1 style="margin:0;font-size:30px;line-height:1.35">현장 작업 보고</h1>
+        <p class="muted" style="margin:0;font-size:17px">${esc(SITE)}</p>
+        <span class="small" style="align-self:flex-start;background:var(--bg);border-radius:6px;padding:6px 8px">프로토타입 테스트 코드 · 업체 ${esc(store.companies[0] ? store.companies[0].code : '')} · 관리자 ${esc(store.adminCode)}</span>
+      </div>
+      <form id="loginForm" class="stack" style="gap:20px" novalidate>
+        <label class="field"><span class="label">접속 코드</span>
+          <input id="code" class="input" inputmode="numeric" maxlength="6" autocomplete="off" placeholder="숫자 6자리" style="height:56px;font-size:17px;letter-spacing:2px">
+          <span class="small muted">업체마다 코드가 달라요. 관리자는 관리자 코드를 넣으면 관리자 화면으로 들어가요.</span>
+          <span id="loginErr" class="small" style="color:#c0392b" hidden>등록되지 않은 코드예요. 다시 확인해 주세요.</span>
+        </label>
+        <label class="row" style="gap:10px;min-height:44px"><input type="checkbox" checked style="width:22px;height:22px;margin:0;accent-color:var(--brand)"> 자동 로그인</label>
+      </form>
+      <div class="login-cta"><button id="loginBtn" class="btn lg" type="submit" form="loginForm" style="width:100%" disabled>시작하기</button></div>
+    </div></main>`;
+  }
+  function bindLogin() {
+    const input = document.getElementById('code');
+    const btn = document.getElementById('loginBtn');
+    input.addEventListener('input', () => { input.value = input.value.replace(/\D/g, '').slice(0, 6); btn.disabled = input.value.length !== 6; document.getElementById('loginErr').hidden = true; });
+    document.getElementById('loginForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const c = input.value;
+      if (c === store.adminCode) { ui.role = 'admin'; ui.companyId = null; saveSession(); go('dashboard'); return; }
+      const co = store.companies.find((x) => x.code === c);
+      if (!co) { document.getElementById('loginErr').hidden = false; return; }
+      ui.role = 'worker'; ui.companyId = co.id; saveSession(); startDraft(); go('report');
+    });
+    input.focus();
+  }
+
+  /* ---------- report ---------- */
+  function startDraft(reportId) {
+    const r = reportId ? store.reports.find((x) => x.id === reportId) : null;
+    const rows = r ? r.rows.map((x) => Object.assign({ id: uid('b') }, x)) : [emptyRow()];
+    ui.draft = { rows, equip: r ? r.equip.map((q) => Object.assign({}, q)) : [], etc: r ? r.etc : '', activeId: rows[rows.length - 1].id };
+    ui.editingId = r ? r.id : null; ui.step = 'edit'; ui.confirmId = null;
+  }
+  function viewReport() {
+    if (!ui.draft) startDraft();
+    const d = ui.draft;
+    const mySubs = store.reports.filter((r) => r.companyId === ui.companyId);
+    const doneCount = d.rows.filter((b) => !missing(b)).length;
+    const ok = doneCount === d.rows.length;
+    const firstBad = d.rows.findIndex((b) => missing(b));
+    const hint = firstBad >= 0 ? `작업 ${firstBad + 1}의 ${missing(d.rows[firstBad])}을 입력해 주세요.` : '';
+    const active = d.rows.find((b) => b.id === d.activeId) || d.rows[0];
+    const order = [active].concat(d.rows.filter((b) => b !== active).reverse());
+    const idx = (b) => d.rows.indexOf(b);
+
+    if (ui.step === 'review') return header('report') + viewReview(d);
+    if (ui.step === 'done') return header('report') + `<main class="wrap"><section class="card stack" style="max-width:560px;margin:0 auto;align-items:center;text-align:center;gap:12px;padding:48px 24px 32px">
+      <div style="width:72px;height:72px;border-radius:999px;background:var(--brand-soft);color:var(--brand);display:flex;align-items:center;justify-content:center"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></div>
+      <h2 style="margin:0;font-size:24px">${ui.lastAction === 'edit' ? '수정 완료' : '제출 완료'}</h2>
+      <p class="muted" style="margin:0;font-size:17px">오늘 작업 현황에 바로 반영됐어요.</p>
+      <a href="#dashboard" style="padding:10px;font-weight:600">오늘 작업 현황 보기</a>
+      <button type="button" class="btn line lg" style="width:100%" data-act="new-report">추가 보고 쓰기</button>
+    </section></main>`;
+
+    const { tabsM, tabsPC } = tabsHtml(d);
+    const chip = (field, v) => `<button type="button" class="chip" aria-pressed="${active[field] === v}" data-act="pick" data-field="${field}" data-val="${esc(v)}">${esc(v)}</button>`;
+    const subs = mySubs.map((r) => `<div class="item"><div class="grow"><b>${esc(reportLabel(r))}</b></div>${ui.confirmId === r.id
+      ? `<span class="row" style="gap:6px"><b class="small">이 보고를 삭제할까요?</b><button type="button" class="btn ghost sm" data-act="cancel-del">취소</button><button type="button" class="btn sm" style="background:#1a1a1a" data-act="del" data-id="${r.id}">삭제</button></span>`
+      : `<span class="row" style="gap:6px"><button type="button" class="btn line sm" data-act="edit-report" data-id="${r.id}">수정</button><button type="button" class="btn ghost sm" data-act="ask-del" data-id="${r.id}">삭제</button></span>`}</div>`).join('');
+    const editing = ui.editingId ? store.reports.find((r) => r.id === ui.editingId) : null;
+    const eqRows = d.equip.map((q, i) => `<div class="eqrow"><input class="input" data-eq="${i}" data-k="name" value="${esc(q.name)}" placeholder="장비명" aria-label="장비명"><input class="input" data-eq="${i}" data-k="spec" value="${esc(q.spec)}" placeholder="규격" aria-label="규격"><input class="input" data-eq="${i}" data-k="qty" value="${esc(q.qty)}" inputmode="numeric" placeholder="대" aria-label="대수" style="text-align:right"><button type="button" class="btn ghost sm" style="width:40px;padding:0;border:0" aria-label="장비 삭제" data-act="eq-del" data-i="${i}">${X}</button></div>`).join('');
+    const ctaPC = `<div class="card pc-only" style="padding:14px 20px;display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:8px 12px"><span class="small muted hint" style="margin-right:auto" ${ok ? 'hidden' : ''}>${esc(hint)}</span><button type="button" class="btn line" data-act="add-row">+ 동 추가</button><button type="button" class="btn" data-act="to-review" ${ok ? '' : 'disabled'}>입력 내용 확인</button></div>`;
+    const ctaM = `<div class="mcta"><div class="small muted hint" style="text-align:center;margin-bottom:8px" ${ok ? 'hidden' : ''}>${esc(hint)}</div><div class="row" style="gap:8px"><button type="button" class="btn line lg" style="flex:1" data-act="add-row">+ 동 추가</button><button type="button" class="btn lg" style="flex:1.4" data-act="to-review" ${ok ? '' : 'disabled'}>입력 내용 확인</button></div></div>`;
+    const b = active; const i = idx(b);
+    return `<div class="stickytop">` + header('report') + `
+      <nav class="mchips" aria-label="작업 탭"><div class="mchips-in"><div id="tabsM" role="tablist" style="display:flex;gap:8px">${tabsM}</div></div></nav></div>
+      <main class="wrap" style="padding-bottom:24px">
+        <h1 class="sr">작업 보고</h1>
+        <div class="cols">
+          <div class="mainc">
+            ${editing ? `<div class="row" style="flex-wrap:wrap;gap:8px 12px;background:var(--brand-soft);border:1px solid var(--brand);border-radius:8px;padding:12px 16px"><b style="color:#0047b8">${esc(editing.time)} 보고를 수정하고 있어요</b><button type="button" class="btn line sm" style="margin-left:auto" data-act="cancel-edit">수정 취소</button></div>` : ''}
+            ${mySubs.length ? `<section class="card stack" style="gap:10px"><div class="stack"><h2 style="margin:0;font-size:17px">오늘 제출한 보고 <span class="small muted">${mySubs.length}건</span></h2><span class="small muted">자정 전까지 수정·삭제할 수 있어요.</span></div>${subs}</section>` : ''}
+            <section class="card stack" style="gap:16px" aria-label="작업 ${i + 1}">
+              <div class="row" style="gap:8px"><h2 style="margin:0;font-size:17px">작업 ${i + 1}</h2><span id="rowPill" class="pill${missing(b) ? '' : ' ok'}">${missing(b) ? '작성 중' : '입력 완료'}</span>${d.rows.length > 1 ? '<button type="button" class="linkbtn" style="margin-left:auto;color:var(--sub);text-decoration:none" data-act="row-del">삭제</button>' : ''}</div>
+              <div class="field"><span class="label">건물(동) <span class="req">*</span></span><div class="chips">${RECENT_DONG.map((v) => chip('dong', v)).join('')}</div><input class="input" data-f="dong" value="${esc(b.dong)}" placeholder="직접 입력 (예: 1208동)" aria-label="동 직접 입력" style="max-width:360px"></div>
+              <div style="display:grid;grid-template-columns:minmax(0,1fr) 112px;gap:12px;max-width:480px">
+                <label class="field"><span class="label">위치(층) <span class="req">*</span></span><input class="input" data-f="floor" value="${esc(b.floor)}" placeholder="예: B1~1"></label>
+                <label class="field"><span class="label">인원(명) <span class="req">*</span></span><input class="input" data-f="count" value="${esc(b.count)}" inputmode="numeric" placeholder="0" style="text-align:right"></label>
+              </div>
+              <div class="field"><span class="label">직종 <span class="req">*</span></span><div class="chips">${TRADES.map((v) => chip('trade', v)).join('')}</div><input class="input" data-f="trade" value="${esc(b.trade)}" placeholder="직접 입력 (예: 시스템비계)" aria-label="직종 직접 입력" style="max-width:360px"></div>
+              <label class="field"><span class="label">작업내용 <span class="req">*</span></span><textarea class="input" rows="2" data-f="work" placeholder="예: 1206동 B1F 수직배근">${esc(b.work)}</textarea></label>
+              <div class="grid2">
+                <label class="field"><span class="label">고위험 작업사항 <span class="opt">선택</span></span><textarea class="input" rows="2" data-f="risk" placeholder="예: 고소작업(단부), 중량물 인양">${esc(b.risk)}</textarea></label>
+                <label class="field"><span class="label">방지대책 <span class="opt">선택</span></span><textarea class="input" rows="2" data-f="prevent" placeholder="예: 안전난간 설치, 안전대 착용">${esc(b.prevent)}</textarea></label>
+              </div>
+            </section>
+            <section class="card stack" style="gap:12px"><div class="stack"><h2 style="margin:0;font-size:17px">투입 장비 <span class="opt">선택</span></h2><span class="small muted">오늘 쓴 장비를 대수로 적어요. 누계는 자동으로 더해져요.</span></div>${eqRows}<button type="button" class="linkbtn" style="align-self:flex-start;text-decoration:none;font-weight:600;font-size:15px" data-act="eq-add">+ 장비 추가</button></section>
+            <section class="card"><label class="field"><span class="label" style="font-size:17px">기타 작업사항 <span class="opt">선택</span></span><span class="small muted">동과 관계없는 작업 (자재 반입, 단지 내 정리 등)</span><textarea class="input" rows="3" data-etc="1" placeholder="없으면 비워 두세요">${esc(d.etc)}</textarea></label></section>
+            ${ctaPC}
+          </div>
+        </div>
+      </main>${ctaM}`;
+  }
+  function tabsHtml(d) {
+    const active = d.rows.find((b) => b.id === d.activeId) || d.rows[0];
+    const order = [active].concat(d.rows.filter((b) => b !== active).reverse());
+    const idx = (b) => d.rows.indexOf(b);
+    const tabsM = order.map((b) => { const done = !missing(b); const act = b === active;
+      return `<button type="button" role="tab" aria-selected="${act}" class="tchip${done ? ' done' : ''}${act ? ' active' : ''}" data-act="tab" data-id="${b.id}">${done ? CHECK : ''}${esc(rowName(b, idx(b)))}${act && !done ? ' 작성 중' : ''}</button>`; }).join('');
+    const tabsPC = order.map((b) => { const done = !missing(b); const act = b === active;
+      return `<button type="button" role="tab" aria-selected="${act}" class="tabrow${done ? ' done' : ''}${act ? ' active' : ''}" data-act="tab" data-id="${b.id}"><span class="dot">${done ? CHECK : ''}</span><span style="flex:1 1 auto;font-weight:600">${esc(rowName(b, idx(b)))}</span><span class="small">${act ? (done ? '입력 완료' : '작성 중') : (done ? '입력 완료' : '미완료')}</span></button>`; }).join('');
+    return { tabsM, tabsPC };
+  }
+  function refreshLive() {
+    const d = ui.draft; if (!d) return;
+    const { tabsM, tabsPC } = tabsHtml(d);
+    const doneCount = d.rows.filter((b) => !missing(b)).length;
+    const ok = doneCount === d.rows.length;
+    const firstBad = d.rows.findIndex((b) => missing(b));
+    const hint = firstBad >= 0 ? `작업 ${firstBad + 1}의 ${missing(d.rows[firstBad])}을 입력해 주세요.` : '';
+    const m = document.getElementById('tabsM'); if (m) m.innerHTML = tabsM;
+    const p = document.getElementById('tabsP'); if (p) p.innerHTML = tabsPC;
+    app.querySelectorAll('.prog').forEach((el) => { el.textContent = doneCount + ' / ' + d.rows.length + ' 입력 완료'; });
+    app.querySelectorAll('.hint').forEach((el) => { el.textContent = hint; el.hidden = ok; });
+    app.querySelectorAll('[data-act="to-review"]').forEach((btn) => { btn.disabled = !ok; });
+    const active = d.rows.find((b) => b.id === d.activeId) || d.rows[0];
+    const pill = document.getElementById('rowPill'); if (pill) { pill.textContent = missing(active) ? '작성 중' : '입력 완료'; pill.className = 'pill' + (missing(active) ? '' : ' ok'); }
+  }
+  function viewReview(d) {
+    const eq = d.equip.filter((q) => q.name.trim());
+    const rowsPC = d.rows.map((b) => `<tr><td class="c" style="font-weight:700;color:var(--brand-strong)">${esc(b.dong)}</td><td class="c">${esc(b.floor)}</td><td class="c">${esc(b.trade)}</td><td class="num">${esc(b.count)}</td><td style="padding:0"><div style="padding:8px 10px">${esc(b.work)}</div>${b.risk.trim() ? `<div class="subrow"><b>고위험</b><span>${esc(b.risk)}</span></div><div class="subrow"><b>방지대책</b><span>${esc(b.prevent || '—')}</span></div>` : ''}</td></tr>`).join('');
+    const rowsM = d.rows.map((b) => `<section class="card stack" style="gap:8px;margin-bottom:12px"><div class="wrapflex" style="gap:6px"><span class="pill ok">${esc(b.dong)}</span><span class="small muted">${esc(b.floor)} · ${esc(b.trade)} · ${esc(b.count)}명</span></div><div style="display:grid;grid-template-columns:88px minmax(0,1fr);gap:6px 12px"><span class="muted">작업내용</span><span>${esc(b.work)}</span><span class="muted">고위험 작업</span><span>${esc(b.risk || '없음')}</span><span class="muted">방지대책</span><span>${esc(b.prevent || '—')}</span></div></section>`).join('');
+    return `<main class="wrap stack" style="gap:12px">
+      <div class="row" style="gap:8px"><button type="button" class="btn ghost sm" style="width:40px;height:40px;padding:0" aria-label="이전" data-act="to-edit">${BACK}</button><h1 style="margin:0;font-size:22px">입력 내용 확인</h1></div>
+      <p class="muted" style="margin:0">아래 내용으로 ${ui.editingId ? '수정' : '제출'}해요. 고칠 게 있으면 이전 버튼을 눌러요.</p>
+      <div class="card pc-only scrollx"><table class="t" style="min-width:760px"><thead><tr><th style="width:88px">건물(동)</th><th style="width:80px">위치(층)</th><th style="width:130px">직종</th><th style="width:76px">인원(명)</th><th>작업내용</th></tr></thead><tbody>${rowsPC}</tbody></table></div>
+      <div class="m-only">${rowsM}</div>
+      <section class="card stack" style="gap:8px"><div class="stack"><b class="small muted">투입 장비</b><span>${eq.length ? eq.map((q) => esc(q.name + (q.spec ? ' ' + q.spec : '') + ' ' + (q.qty || 0) + '대')).join(', ') : '없음'}</span></div><div class="stack"><b class="small muted">기타 작업사항</b><span>${esc(d.etc.trim() || '없음')}</span></div></section>
+      <div class="pc-only" style="display:flex;justify-content:flex-end"><button type="button" class="btn" style="padding:0 32px" data-act="submit">${ui.editingId ? '수정 완료' : '제출하기'}</button></div>
+    </main><div class="mcta"><button type="button" class="btn lg" style="width:100%" data-act="submit">${ui.editingId ? '수정 완료' : '제출하기'}</button></div>`;
+  }
+
+  /* ---------- dashboard ---------- */
+  function viewDashboard() {
+    const all = store.reports.flatMap((r) => r.rows.map((row) => Object.assign({ companyId: r.companyId }, row)));
+    const names = Array.from(new Set(all.map((x) => cname(x.companyId)))).sort();
+    const sel = names.includes(ui.filter) ? ui.filter : '전체';
+    const rows = sel === '전체' ? all : all.filter((x) => cname(x.companyId) === sel);
+    const groups = Array.from(new Set(rows.map((x) => cname(x.companyId)))).sort().map((n) => ({ name: n, rows: rows.filter((x) => cname(x.companyId) === n) }));
+    const sum = (list) => list.reduce((a, x) => a + (Number(x.count) || 0), 0);
+    const etcs = store.reports.filter((r) => r.etc.trim() && (sel === '전체' || cname(r.companyId) === sel));
+    const crew = groups.map((g) => { const co = store.companies.find((c) => c.name === g.name); const t = sum(g.rows); return { name: g.name, today: t, cum: (co ? co.cumPrev : 0) + t }; });
+    const eqMap = {};
+    store.reports.forEach((r) => r.equip.forEach((q) => { if (!q.name.trim()) return; const k = q.name.trim() + '|' + q.spec.trim(); eqMap[k] = (eqMap[k] || 0) + (Number(q.qty) || 0); }));
+    const eqKeys = Array.from(new Set(Object.keys(eqMap).concat(Object.keys(store.equipCumPrev))));
+    const equip = eqKeys.map((k) => { const [n, sp] = k.split('|'); const t = eqMap[k] || 0; return { n, sp, t, cum: (store.equipCumPrev[k] || 0) + t }; }).filter((q) => q.t > 0);
+    const mine = ui.role === 'worker' ? store.reports.filter((r) => r.companyId === ui.companyId) : [];
+    const fmt = (n) => n.toLocaleString('ko-KR');
+
+    const tbody = groups.map((g) => g.rows.map((x, i) => `<tr>${i === 0 ? `<td rowspan="${g.rows.length}" style="font-weight:600">${esc(g.name)}</td>` : ''}<td class="c">${esc(x.dong)}</td><td class="c">${esc(x.floor)}</td><td class="c">${esc(x.trade)}</td><td class="num">${esc(x.count)}</td><td style="padding:0"><div style="padding:8px 10px">${esc(x.work)}</div>${x.risk ? `<div class="subrow"><b>고위험</b><span>${esc(x.risk)}</span></div><div class="subrow"><b>방지대책</b><span>${esc(x.prevent || '—')}</span></div>` : ''}</td></tr>`).join('')).join('');
+    const cards = groups.map((g) => `<div class="card" style="padding:0;overflow:hidden;margin-bottom:10px"><div class="row" style="gap:8px;align-items:baseline;padding:12px 14px"><h3 style="margin:0;font-size:16px">${esc(g.name)}</h3><span class="small muted">${g.rows.length}건 · ${sum(g.rows)}명</span></div><table class="mt" aria-label="${esc(g.name)} 작업 내용"><tbody>${g.rows.map((x) => `<tr class="mt-first"><td class="mt-dong" rowspan="${x.risk ? 6 : 4}">${esc(x.dong)}</td><td>${esc(x.floor)}</td></tr><tr><td>${esc(x.trade)}</td></tr><tr><td>${esc(x.count)}명</td></tr><tr><td>${esc(x.work)}</td></tr>${x.risk ? `<tr><td class="mt-risk"><b>고위험</b>${esc(x.risk)}</td></tr><tr><td class="mt-risk"><b>방지대책</b>${esc(x.prevent || '—')}</td></tr>` : ''}`).join('')}</tbody></table></div>`).join('');
+    const chips = ['전체'].concat(names).map((n) => `<button type="button" class="fchip" aria-pressed="${sel === n}" data-act="filter" data-val="${esc(n)}">${esc(n)} <span>${n === '전체' ? all.length : all.filter((x) => cname(x.companyId) === n).length}</span></button>`).join('');
+    const empty = '<p class="muted" style="margin:0;padding:16px;text-align:center">오늘 올라온 보고가 없어요.</p>';
+
+    return header('dashboard') + `<main class="wrap stack" style="gap:20px">
+      <h1 class="sr">오늘 작업 현황</h1>
+      <div class="wrapflex" style="gap:8px 12px"><label class="row muted" style="gap:8px;font-size:14px">날짜 <input type="date" value="${new Date().toISOString().slice(0, 10)}" class="input" style="height:40px;font-size:15px;width:auto;padding:0 12px"></label>${ui.role === 'admin' ? '<button type="button" class="btn pc-only" style="margin-left:auto;height:40px;font-size:15px" data-act="excel">엑셀 내려받기</button>' : ''}</div>
+      ${ui.role === 'worker' ? `<section class="card stack" style="gap:12px;border:1px solid var(--brand)"><div class="wrapflex" style="gap:8px 12px"><div class="stack" style="flex:1 1 220px;min-width:0"><h2 style="margin:0;font-size:17px">우리 업체 오늘 보고 <span class="small muted">${mine.length}건</span></h2><span class="small muted">자정 전까지 수정·삭제할 수 있어요.</span></div><a href="#report" class="btn pc-only" data-act="new-report-link">+ 작업 보고 쓰기</a></div>${mine.map((r) => `<div class="item"><div class="grow"><b>${esc(reportLabel(r))}</b></div><button type="button" class="btn line sm" data-act="edit-report" data-id="${r.id}">수정·삭제</button></div>`).join('') || '<p class="muted small" style="margin:0">아직 제출한 보고가 없어요.</p>'}<a href="#report" class="btn lg m-only" style="text-align:center;line-height:56px" data-act="new-report-link">+ 작업 보고 쓰기</a></section>` : ''}
+      <section aria-label="오늘 요약" class="kpi"><div><span class="muted small">금일 인원</span><strong style="color:var(--brand)">${sum(all)}<small>명</small></strong></div><div><span class="muted small">참여 업체</span><strong>${names.length}<small>곳</small></strong></div><div><span class="muted small">고위험 작업</span><strong>${all.filter((x) => x.risk).length}<small>건</small></strong></div><div><span class="muted small">투입 장비</span><strong>${equip.reduce((a, q) => a + q.t, 0)}<small>대</small></strong></div></section>
+      <section aria-label="업체별 보기" class="filter">${chips}</section>
+      <section class="card stack pc-only" style="gap:14px"><h2 style="margin:0;font-size:19px">금일 작업 내용 <span class="small muted">${rows.length}건 · ${sel === '전체' ? '업체별' : esc(sel)}</span></h2>${rows.length ? `<div class="scrollx"><table class="t" style="min-width:900px"><thead><tr><th style="width:120px">업체</th><th style="width:88px">건물(동)</th><th style="width:80px">위치(층)</th><th style="width:130px">직종</th><th style="width:76px">인원(명)</th><th>작업내용</th></tr></thead><tbody>${tbody}</tbody></table></div>` : empty}</section>
+      <section class="m-only"><h2 style="margin:4px 0 12px;font-size:19px">금일 작업 내용 <span class="small muted">${rows.length}건</span></h2>${rows.length ? cards : `<div class="card">${empty}</div>`}</section>
+      <section class="card stack" style="gap:14px"><h2 style="margin:0;font-size:19px">기타 작업사항 <span class="small muted">${etcs.length}건</span></h2>${etcs.length ? `<table class="t"><thead><tr><th style="width:30%">업체</th><th>작업내용</th></tr></thead><tbody>${etcs.map((r) => `<tr><td style="font-weight:600">${esc(cname(r.companyId))}</td><td>${esc(r.etc)}</td></tr>`).join('')}</tbody></table>` : empty}</section>
+      <div class="pair">
+        <section class="card stack" style="gap:14px"><h2 style="margin:0;font-size:19px">금일 인원 현황</h2><span class="small muted" style="margin-top:-8px">누계: 서비스 시작일 [YYYY-MM-DD]부터</span><table class="t"><thead><tr><th>업체</th><th style="width:28%">금일</th><th style="width:28%">누계</th></tr></thead><tbody>${crew.map((c) => `<tr><td>${esc(c.name)}</td><td class="num">${c.today}</td><td class="num">${fmt(c.cum)}</td></tr>`).join('')}</tbody><tfoot><tr><th scope="row" style="text-align:center">인원합계</th><td class="num">${crew.reduce((a, c) => a + c.today, 0)}</td><td class="num">${fmt(crew.reduce((a, c) => a + c.cum, 0))}</td></tr></tfoot></table></section>
+        <section class="card stack" style="gap:14px"><h2 style="margin:0;font-size:19px">장비 투입 현황 ${sel !== '전체' ? '<span class="small muted">현장 전체 기준</span>' : ''}</h2><span class="small muted" style="margin-top:-8px">누계: 서비스 시작일 [YYYY-MM-DD]부터</span><table class="t"><thead><tr><th>장비명</th><th style="width:18%">규격</th><th style="width:18%">금일</th><th style="width:18%">누계</th></tr></thead><tbody>${equip.map((q) => `<tr><td>${esc(q.n)}</td><td class="num">${esc(q.sp)}</td><td class="num">${q.t}</td><td class="num">${q.cum}</td></tr>`).join('')}</tbody><tfoot><tr><th scope="row" colspan="2" style="text-align:center">총계</th><td class="num">${equip.reduce((a, q) => a + q.t, 0)}</td><td class="num">${equip.reduce((a, q) => a + q.cum, 0)}</td></tr></tfoot></table></section>
+      </div>
+      ${ui.role === 'admin' ? '<p class="small muted m-only" style="margin:0;text-align:center">엑셀 내려받기는 PC 화면에서 할 수 있어요.</p>' : ''}
+      <button type="button" class="linkbtn small" style="align-self:center;color:var(--muted)" data-act="reset-demo">프로토타입 데이터 처음으로</button>
+    </main>`;
+  }
+
+  /* ---------- settings ---------- */
+  function viewSettings() {
+    const today = (cid) => store.reports.filter((r) => r.companyId === cid).length;
+    const rows = store.companies.map((c) => `<tr style="${ui.newCompId === c.id ? 'background:var(--brand-soft)' : ''}"><td style="font-weight:600">${esc(c.name)}${ui.newCompId === c.id ? ' <span class="pill ok">방금 등록</span>' : ''}</td><td class="c" style="font-size:17px;font-weight:700;letter-spacing:3px;font-variant-numeric:tabular-nums">${esc(c.code)}</td><td class="num">${today(c.id)}건</td><td><div class="row" style="gap:6px;justify-content:flex-end"><button type="button" class="btn ghost sm" data-act="comp-reissue" data-id="${c.id}">코드 재발급</button><button type="button" class="linkbtn" style="color:var(--sub);text-decoration:none" data-act="comp-del" data-id="${c.id}">삭제</button></div></td></tr>`).join('');
+    const link = location.href.split('#')[0];
+    return header('settings') + `<main class="wrap stack" style="gap:20px;max-width:1024px">
+      <h1 class="sr">현장 설정</h1>
+      <div class="wrapflex" style="gap:8px 12px"><span class="badge admin">진행 중</span><span class="muted" style="font-size:14px">서비스 시작일 [YYYY-MM-DD] · 누계는 이날부터 쌓여요</span></div>
+      <section class="card stack" style="gap:10px"><h2 style="margin:0;font-size:19px">단톡방에 올릴 링크</h2><div class="row" style="gap:8px;max-width:640px"><span id="shareLink" style="flex:1 1 auto;min-width:0;display:flex;align-items:center;height:48px;padding:0 14px;border-radius:8px;background:var(--bg);color:var(--sub);overflow:hidden;white-space:nowrap;text-overflow:ellipsis">${esc(link)}</span><button type="button" class="btn" data-act="copy-link">링크 복사</button></div><span class="small muted">모든 업체가 같은 링크로 들어오고, 아래 업체별 접속 코드로 로그인해요.</span></section>
+      <section class="card stack" style="gap:10px"><h2 style="margin:0;font-size:19px">관리자 코드</h2><div class="wrapflex" style="gap:8px"><span style="display:flex;align-items:center;height:48px;padding:0 16px;border-radius:8px;background:var(--bg);font-size:20px;font-weight:700;letter-spacing:4px">${esc(store.adminCode)}</span><button type="button" class="btn ghost" data-act="admin-reissue">코드 재발급</button></div><span class="small muted">작업자와 같은 로그인 화면에서 이 코드를 넣으면 관리자 화면으로 들어가요. 업체 코드와 겹치지 않아요.</span></section>
+      <section class="card stack" style="gap:16px"><div class="stack"><h2 style="margin:0;font-size:19px">업체·접속 코드 <span class="small muted">${store.companies.length}곳</span></h2><span class="small muted">업체를 등록하면 다른 업체와 겹치지 않는 6자리 코드가 자동으로 만들어져요.</span></div>
+        <form id="compForm" class="wrapflex" style="gap:8px;align-items:flex-end"><label class="field" style="flex:1 1 260px;max-width:420px"><span class="label small">업체명</span><input id="compName" class="input" value="${esc(ui.compDraft)}" placeholder="예: OO건설(주)"></label><button id="compBtn" type="submit" class="btn" ${ui.compDraft.trim() ? '' : 'disabled'}>등록하고 코드 발급</button>${ui.compDup ? '<span class="small" style="flex-basis:100%;color:var(--brand-strong)">이미 등록된 업체예요.</span>' : ''}</form>
+        <div class="scrollx"><table class="t" style="min-width:560px"><thead><tr><th>업체명</th><th style="width:150px">접속 코드</th><th style="width:110px">오늘 제출</th><th style="width:190px">관리</th></tr></thead><tbody>${rows}</tbody></table></div>
+        <span class="small muted">코드를 재발급하면 그 업체는 새 코드로 다시 로그인해야 해요. 업체를 삭제해도 이미 제출한 보고는 남아요.</span></section>
+    </main>`;
+  }
+
+  /* ---------- render & events ---------- */
+  const app = document.getElementById('app');
+  let lastFocus = null;
+  function render() {
+    const r = route();
+    if (current !== r) { current = r; try { history.replaceState(null, '', '#' + r); } catch (e) { /* 무시 */ } }
+    if (r === 'login') { app.innerHTML = viewLogin(); bindLogin(); window.scrollTo(0, 0); return; }
+    if (r === 'report') app.innerHTML = viewReport();
+    else if (r === 'dashboard') app.innerHTML = viewDashboard();
+    else app.innerHTML = viewSettings();
+    document.title = ({ report: '작업 보고', dashboard: '오늘 작업 현황', settings: '현장 설정' }[r]) + ' · 현장 작업 보고';
+    if (r === 'settings') bindSettings();
+    if (lastFocus) { const el = app.querySelector(lastFocus.sel); if (el) { el.focus(); try { el.setSelectionRange(lastFocus.pos, lastFocus.pos); } catch (e) { /* 일부 입력은 지원 안 함 */ } } lastFocus = null; }
+  }
+  function rerenderKeepFocus(el) {
+    let sel = null;
+    if (el.dataset.f) sel = `[data-f="${el.dataset.f}"]`;
+    else if (el.dataset.eq) sel = `[data-eq="${el.dataset.eq}"][data-k="${el.dataset.k}"]`;
+    else if (el.dataset.etc) sel = '[data-etc="1"]';
+    lastFocus = sel ? { sel, pos: el.selectionStart } : null;
+    render();
+  }
+  function bindSettings() {
+    const inp = document.getElementById('compName');
+    const btn = document.getElementById('compBtn');
+    inp.addEventListener('input', () => { ui.compDraft = inp.value; ui.compDup = false; btn.disabled = !inp.value.trim(); });
+    document.getElementById('compForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = ui.compDraft.trim(); if (!name) return;
+      if (store.companies.some((c) => c.name === name)) { ui.compDup = true; render(); return; }
+      const c = { id: uid('c'), name, code: newCode(), cumPrev: 0 };
+      store.companies.push(c); ui.newCompId = c.id; ui.compDraft = ''; save(); render(); toast(name + ' 코드 ' + c.code + ' 발급');
+    });
+  }
+
+  app.addEventListener('input', (e) => {
+    const t = e.target; const d = ui.draft;
+    if (!d) return;
+    const active = d.rows.find((b) => b.id === d.activeId) || d.rows[0];
+    if (t.dataset.f) {
+      let v = t.value;
+      if (t.dataset.f === 'count') { v = v.replace(/\D/g, ''); if (v !== t.value) t.value = v; }
+      active[t.dataset.f] = v;
+      // 입력 칸은 그대로 두고 탭·진행·버튼만 갱신 (한글 입력이 끊기지 않게)
+      refreshLive();
+    }
+    else if (t.dataset.eq) { d.equip[Number(t.dataset.eq)][t.dataset.k] = t.dataset.k === 'qty' ? t.value.replace(/\D/g, '') : t.value; }
+    else if (t.dataset.etc) { d.etc = t.value; }
+  });
+
+
+  app.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href^="#"]');
+    if (link) {
+      e.preventDefault();
+      if (link.dataset.act === 'new-report-link') startDraft();
+      go(link.getAttribute('href').slice(1));
+      return;
+    }
+    const el = e.target.closest('[data-act]'); if (!el) return;
+    const act = el.dataset.act; const d = ui.draft;
+    const active = d ? (d.rows.find((b) => b.id === d.activeId) || d.rows[0]) : null;
+    switch (act) {
+      case 'logout': ui.role = null; ui.companyId = null; ui.draft = null; saveSession(); go('login'); break;
+      case 'tab': d.activeId = el.dataset.id; render(); break;
+      case 'pick': active[el.dataset.field] = el.dataset.val; render(); break;
+      case 'add-row': { const b = emptyRow(); d.rows.push(b); d.activeId = b.id; render(); window.scrollTo({ top: 0, behavior: 'smooth' }); break; }
+      case 'row-del': { d.rows = d.rows.filter((b) => b !== active); d.activeId = d.rows[d.rows.length - 1].id; render(); break; }
+      case 'eq-add': d.equip.push({ name: '', spec: '', qty: '' }); render(); break;
+      case 'eq-del': d.equip.splice(Number(el.dataset.i), 1); render(); break;
+      case 'to-review': ui.step = 'review'; render(); window.scrollTo(0, 0); break;
+      case 'to-edit': ui.step = 'edit'; render(); break;
+      case 'submit': {
+        const payload = { rows: d.rows.map(({ id, ...x }) => x), equip: d.equip.filter((q) => q.name.trim()), etc: d.etc };
+        if (ui.editingId) { const r = store.reports.find((x) => x.id === ui.editingId); Object.assign(r, payload, { edited: true }); ui.lastAction = 'edit'; }
+        else { store.reports.push(Object.assign({ id: uid('r'), companyId: ui.companyId, time: now(), edited: false }, payload)); ui.lastAction = 'new'; }
+        save(); ui.step = 'done'; ui.editingId = null; render(); window.scrollTo(0, 0); break;
+      }
+      case 'new-report': startDraft(); render(); break;
+      case 'edit-report': startDraft(el.dataset.id); go('report'); break;
+      case 'cancel-edit': startDraft(); render(); break;
+      case 'ask-del': ui.confirmId = el.dataset.id; render(); break;
+      case 'cancel-del': ui.confirmId = null; render(); break;
+      case 'del': { const id = el.dataset.id; store.reports = store.reports.filter((r) => r.id !== id); if (ui.editingId === id) startDraft(); ui.confirmId = null; save(); render(); toast('보고를 삭제했어요'); break; }
+      case 'filter': ui.filter = el.dataset.val; render(); break;
+      case 'excel': toast('프로토타입에서는 파일을 내려받지 않아요'); break;
+      case 'reset-demo': store = seed(); save(); ui.filter = '전체'; render(); toast('예시 데이터로 되돌렸어요'); break;
+      case 'copy-link': { const txt = document.getElementById('shareLink').textContent; (navigator.clipboard ? navigator.clipboard.writeText(txt) : Promise.reject()).then(() => toast('링크를 복사했어요'), () => toast('복사가 안 되면 링크를 길게 눌러 복사해 주세요')); break; }
+      case 'admin-reissue': store.adminCode = newCode(); save(); render(); toast('새 관리자 코드 ' + store.adminCode); break;
+      case 'comp-reissue': { const c = company(el.dataset.id); c.code = newCode(); save(); render(); toast(c.name + ' 새 코드 ' + c.code); break; }
+      case 'comp-del': store.companies = store.companies.filter((c) => c.id !== el.dataset.id); save(); render(); break;
+      default: break;
+    }
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
